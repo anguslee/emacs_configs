@@ -179,6 +179,11 @@ stroustrup style. ")
 (require 'psvn)
 (global-set-key [(f8)] 'svn-status)
 
+;; git
+(add-to-list 'load-path "~/.emacs.d/site-lisp/git")
+(require 'git)
+(require 'git-blame)
+
 ;; multi-eshell
 (require 'multi-eshell)
 ;; (global-set-key "\C-c .-e" 'multi-eshell)
