@@ -183,6 +183,7 @@ stroustrup style. ")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/git")
 (require 'git)
 (require 'git-blame)
+(global-set-key [(f11)] 'git-status)
 
 ;; multi-eshell
 (require 'multi-eshell)
