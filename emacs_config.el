@@ -245,3 +245,12 @@ stroustrup style. ")
 ;; 用 ; 暂时输入英文
 (require 'eim-extra)
 (global-set-key ";" 'eim-insert-ascii)
+
+;; restclient
+(add-to-list 'load-path "~/.emacs.d/site-lisp/restclient")
+(require 'restclient)
+
+;; emacs-jabber
+(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-jabber-0.8.91")
+(require 'jabber-autoloads)
+
