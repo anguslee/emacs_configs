@@ -86,25 +86,34 @@
 
 ;; cc-mode
 (require 'cc-mode)
+
+;; google-c-style
+(add-to-list 'load-path "~/.emacs.d/site-lisp/")
+(require 'google-c-style)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+(add-hook 'c++-mode-common-hook 'google-set-c-style)
+(add-hook 'c++-mode-common-hook 'google-make-newline-indent)
+
 ;; Create my personal c style which follows the coding standard of the pyramid project
-(defconst pyramid-c-style
-'((c-basic-offset . 4)
-(c-comment-only-line-offset . 0)
-(c-hanging-braces-alist . ((substatement-open before after)
-(brace-list-open)))
-(c-offsets-alist
-(statement-block-intro . +)
-(substatement-open . 0)
-(inline-open . 0)
-(substatement-label . 0)
-;;(access-label . 0)
-(statement-cont . +))
-)
-"Pyramid C/C++ Programming Style\nThis style is a modification of
-stroustrup style. ")
-(c-add-style "pyramid" pyramid-c-style)
-(setq c-default-style '((c++-mode . "pyramid") (c-mode . "pyramid")
-(java-mode . "java") (awk-mode . "awk") (other . "gnu")))
+;; (defconst pyramid-c-style
+;; '((c-basic-offset . 4)
+;; (c-comment-only-line-offset . 0)
+;; (c-hanging-braces-alist . ((substatement-open before after)
+;; (brace-list-open)))
+;; (c-offsets-alist
+;; (statement-block-intro . +)
+;; (substatement-open . 0)
+;; (inline-open . 0)
+;; (substatement-label . 0)
+;; ;;(access-label . 0)
+;; (statement-cont . +))
+;; )
+;; "Pyramid C/C++ Programming Style\nThis style is a modification of
+;; stroustrup style. ")
+;; (c-add-style "pyramid" pyramid-c-style)
+;; (setq c-default-style '((c++-mode . "pyramid") (c-mode . "pyramid")
+;; (java-mode . "java") (awk-mode . "awk") (other . "gnu")))
 
 (setq auto-mode-alist
 	  (append '(("\\.h$" . c++-mode)) auto-mode-alist))
@@ -112,15 +121,12 @@ stroustrup style. ")
 (add-hook 'c-mode-hook 'semantic-default-c-setup)
 (add-hook 'c++-mode-hook 'semantic-default-c-setup)
 
-(define-key c-mode-base-map [(return)] 'newline-and-indent)
+;; (define-key c-mode-base-map [(return)] 'newline-and-indent)
 (global-set-key [(f5)] 'gdb)
 (global-set-key [(f7)] 'compile)
 (define-key c-mode-base-map [(control x) (t)] 'eassist-switch-h-cpp) ;override toggle-source()
 (define-key c-mode-base-map [(control c) (u)] 'uncomment-region)
 (define-key c-mode-base-map [(meta \`)] 'c-indent-command)
-;; (define-key c-mode-base-map [(tab)] 'my-indent-or-complete)
-;; (define-key c-mode-base-map [(meta p)] 'my-indent-or-complete)
-;; (define-key c-mode-base-map [(meta ?/)] 'semantic-ia-complete-symbol-menu)
 
 (setq-mode-local c-mode
                  semanticdb-find-default-throttle
@@ -253,4 +259,10 @@ stroustrup style. ")
 ;; emacs-jabber
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-jabber-0.8.91")
 (require 'jabber-autoloads)
+
+;; auctex
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auctex-11.86")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auctex-11.86/preview")
+(require 'latex)
+(require 'preview-latex)
 
