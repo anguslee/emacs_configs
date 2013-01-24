@@ -95,6 +95,10 @@
 (add-hook 'c++-mode-common-hook 'google-set-c-style)
 (add-hook 'c++-mode-common-hook 'google-make-newline-indent)
 
+(setq c-default-style '((c++-mode . "Google") (c-mode . "Google")
+(java-mode . "java") (awk-mode . "awk") (other . "gnu")))
+
+
 ;; Create my personal c style which follows the coding standard of the pyramid project
 ;; (defconst pyramid-c-style
 ;; '((c-basic-offset . 4)
@@ -121,7 +125,7 @@
 (add-hook 'c-mode-hook 'semantic-default-c-setup)
 (add-hook 'c++-mode-hook 'semantic-default-c-setup)
 
-;; (define-key c-mode-base-map [(return)] 'newline-and-indent)
+(define-key c-mode-base-map [(return)] 'newline-and-indent)
 (global-set-key [(f5)] 'gdb)
 (global-set-key [(f7)] 'compile)
 (define-key c-mode-base-map [(control x) (t)] 'eassist-switch-h-cpp) ;override toggle-source()
@@ -225,10 +229,11 @@
 (setq erc-autojoin-channels-alist '(("ircd.ratbox" "#searchteam" "#tech" "#addev" "#dujia")))
 
 ;; slime & lisp mode
-(setq inferior-lisp-program "/usr/bin/clisp")
+(setq inferior-lisp-program "sbcl")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/slime/")
 (require 'slime-autoloads)
 (slime-setup)
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
 (add-hook 'lisp-mode-hook 'auto-complete-mode)
 (define-key lisp-mode-map [(return)] 'newline-and-indent)
 
@@ -261,8 +266,17 @@
 (require 'jabber-autoloads)
 
 ;; auctex
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auctex-11.86")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auctex-11.86/preview")
-(require 'latex)
-(require 'preview-latex)
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auctex")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auctex/auctex")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auctex/preview")
+(load "preview-latex.el" nil t t)
+(load "latex.el")
+(setq TeX-auto-save t) 
+(setq TeX-parse-self t) 
+(setq TeX-save-query nil)
+(setq TeX-PDF-mode t)
 
+;; org-mode
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/contribe/lisp")
+(setq org-support-shift-select t)
