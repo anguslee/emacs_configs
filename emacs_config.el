@@ -21,14 +21,9 @@
 ;;; uncomment for CJK utf-8 support for non-Asian users
 ;; (require 'un-define)
 
-;; (pc-selection-mode t)
 (column-number-mode t)
-(setq default-directory "~/Documents/qunar/workspace/qunar-dev/search-team")
+(setq default-directory "~/Documents/Workspace/")
 
-;; font
-;;(set-default-font "-adobe-courier-medium-r-normal--18-180-75-75-m-110-iso8859-1")
-;;(set-default-font "-adobe-courier-medium-r-normal--14-140-75-75-m-90-iso10646-1")
-;; (set-default-font monospace)
 
 ;; color themes:
 (add-to-list 'load-path' "~/.emacs.d/site-lisp")
@@ -46,13 +41,8 @@
 (require 'xcscope)
 
 ;; cedet:
-(add-to-list 'load-path "~/.emacs.d/site-lisp/cedet-1.1/common")
-;(setq semantic-load-turn-everything-on t)
 (setq semantic-load-enable-code-helpers t)
-(load-file "~/.emacs.d/site-lisp/cedet-1.1/common/cedet.el")
-(global-semantic-highlight-func-mode 1)
-(semantic-load-enable-gaudy-code-helpers)
-(global-semantic-idle-local-symbol-highlight-mode 1)
+;(load-file "~/.emacs.d/site-lisp/cedet-1.1/common/cedet.el")
 (setq semantic-load-turn-useful-things-on t)
 (setq semanticdb-project-roots  (list
         (expand-file-name "/") ) )
@@ -69,10 +59,7 @@
 ;; (semantic-add-system-include "/usr/include/" 'c-mode)
 
 ;; malabar
-(add-to-list 'load-path "~/.emacs.d/site-lisp/cedet-1.1/common")
-(require 'cedet)
 (add-to-list 'load-path "~/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lisp")
- (semantic-load-enable-minimum-features) ;; or enable more if you wish
 (require 'malabar-mode)
 (setq malabar-groovy-lib-dir "/home/angus/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lib")
 (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
@@ -149,7 +136,7 @@
 
 
 ;; ecb
-(add-to-list 'load-path "~/.emacs.d/site-lisp/ecb-2.40")
+(add-to-list 'load-path "~/.emacs.d/elisp-git/ecb")
 (setq stack-trace-on-error t)
 (require 'ecb)
 
@@ -173,7 +160,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
 
 ;; auto-complete-mode:
 (add-to-list 'load-path "/home/angus/.emacs.d/site-lisp/")
@@ -220,13 +206,6 @@
 ;; Tramp
 (setq tramp-default-method "ssh")
 
-;; erc settings for l-tuanirc1
-(require 'erc)
-(setq erc-default-server "l-tuanirc1.corp.qunar.com")
-
-(global-set-key "\C-cef" (lambda () (interactive)
-                             (erc :server "l-tuanirc1.corp.qunar.com" :port "6667" :nick "angus-emacs")))
-(setq erc-autojoin-channels-alist '(("ircd.ratbox" "#searchteam" "#tech" "#addev" "#dujia")))
 
 ;; slime & lisp mode
 (setq inferior-lisp-program "sbcl")
@@ -261,22 +240,20 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/restclient")
 (require 'restclient)
 
-;; emacs-jabber
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-jabber-0.8.91")
-(require 'jabber-autoloads)
 
 ;; auctex
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auctex")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auctex/auctex")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auctex/preview")
-(load "preview-latex.el" nil t t)
-(load "latex.el")
-(setq TeX-auto-save t) 
-(setq TeX-parse-self t) 
-(setq TeX-save-query nil)
-(setq TeX-PDF-mode t)
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auctex")
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auctex/auctex")
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auctex/preview")
+;; (load "preview-latex.el" nil t t)
+;; (load "latex.el")
+;; (setq TeX-auto-save t) 
+;; (setq TeX-parse-self t) 
+;; (setq TeX-save-query nil)
+;; (setq TeX-PDF-mode t)
 
 ;; org-mode
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/contribe/lisp")
+(add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/lisp")
+(add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/contribe/lisp")
 (setq org-support-shift-select t)
+
