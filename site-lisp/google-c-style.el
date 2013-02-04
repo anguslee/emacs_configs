@@ -58,11 +58,11 @@ Suitable for inclusion in `c-offsets-alist'."
     (if (looking-at "\\(\\(if\\|for\\|while\\)\\s *(\\)")
         (goto-char (match-end 1)))
     (vector (+ 4 (current-column)))))
-        
+
 (defconst google-c-style
   `((c-recognize-knr-p . nil)
     (c-enable-xemacs-performance-kludge-p . t) ; speed up indentation in XEmacs
-    (c-basic-offset . 2)
+    (c-basic-offset . 4)
     (indent-tabs-mode . nil)
     (c-comment-only-line-offset . 0)
     (c-hanging-braces-alist . ((defun-open after)
