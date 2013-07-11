@@ -154,7 +154,7 @@
  ;; If there is more than one, they won't work right.
  '(current-language-environment "UTF-8")
  '(ecb-options-version "2.40")
- '(safe-local-variable-values (quote ((encoding . utf-8)))))
+ '(safe-local-variable-values (quote ((Base . 10) (Package . HUNCHENTOOT) (Syntax . COMMON-LISP) (encoding . utf-8)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -258,3 +258,6 @@
 (add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/contribe/lisp")
 (setq org-support-shift-select t)
 
+;; json-mode
+(add-to-list 'load-path "~/.emacs.d/site-lisp/json-mode-master")
+(require 'json-mode)
