@@ -197,6 +197,18 @@
 
 ;;; Code:
 
+;; Fix (void-function plist-to-alist) issue
+(defun plist-to-alist (the-plist)
+  (defun get-tuple-from-plist (the-plist)
+    (when the-plist
+      (cons (car the-plist) (cadr the-plist))))
+
+  (let ((alist '()))
+    (while the-plist
+      (add-to-list 'alist (get-tuple-from-plist the-plist))
+      (setq the-plist (cddr the-plist)))
+  alist))
+
 (require 'cl); set-difference is a function...
 
 ;; for custom-face-attributes-get or face-custom-attributes-get
@@ -234,16 +246,6 @@
 
 ;; That's why we depend on cus-face.el functionality.
 
-(defun plist-to-alist (the-plist)
-  (defun get-tuple-from-plist (the-plist)
-    (when the-plist
-      (cons (car the-plist) (cadr the-plist))))
-
-  (let ((alist '()))
-    (while the-plist
-      (add-to-list 'alist (get-tuple-from-plist the-plist))
-      (setq the-plist (cddr the-plist)))
-  alist))
 
 (cond ((fboundp 'custom-face-attributes-get)
        (defalias 'color-theme-face-attr-construct
