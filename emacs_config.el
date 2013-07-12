@@ -4,7 +4,6 @@
 (setq-default tab-width 4 indent-tabs-mode nil)
 (setq c-basic-offset 4)
 (setq x-select-enable-clipboard t)
-
 (set-language-environment "UTF-8")
 
 ;; character encoding auto-detection:
@@ -22,7 +21,7 @@
 ;; (require 'un-define)
 
 (column-number-mode t)
-(setq default-directory "~/Documents/Workspace/")
+(setq default-directory "~/Workspace/")
 
 
 ;; color themes:
@@ -41,8 +40,8 @@
 (require 'xcscope)
 
 ;; cedet:
+;; (load-file "~/.emacs.d/site-lisp/cedet-1.1/common/cedet.el")
 (setq semantic-load-enable-code-helpers t)
-;(load-file "~/.emacs.d/site-lisp/cedet-1.1/common/cedet.el")
 (setq semantic-load-turn-useful-things-on t)
 (setq semanticdb-project-roots  (list
         (expand-file-name "/") ) )
@@ -61,7 +60,7 @@
 ;; malabar
 (add-to-list 'load-path "~/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lisp")
 (require 'malabar-mode)
-(setq malabar-groovy-lib-dir "/home/angus/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lib")
+(setq malabar-groovy-lib-dir "/Users/apple/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lib")
 (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 (add-to-list 'auto-mode-alist '("\\.groovy\\'" . malabar-mode))
 (add-hook 'malabar-mode-hook
@@ -145,8 +144,8 @@
       ecb-tip-of-the-day nil
  )
 ;; ecb Hot-key binding:
-(global-set-key [(f9)] 'ecb-activate)
-(global-set-key [(f12)] 'ecb-deactivate)
+(global-set-key [(control f9)] 'ecb-activate)
+(global-set-key [(control f12)] 'ecb-deactivate)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -163,9 +162,9 @@
  )
 
 ;; auto-complete-mode:
-(add-to-list 'load-path "/home/angus/.emacs.d/site-lisp/")
+(add-to-list 'load-path "/Users/apple/.emacs.d/site-lisp/")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "/home/angus/.emacs.d/site-lisp/ac-dict")
+(add-to-list 'ac-dictionary-directories "/Users/apple/.emacs.d/site-lisp/ac-dict")
 (ac-config-default)
 (global-set-key [(control c) (a) (c)] 'auto-complete-mode)
 
@@ -254,9 +253,9 @@
 ;; (setq TeX-PDF-mode t)
 
 ;; org-mode
-(add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/lisp")
-(add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/contribe/lisp")
-(setq org-support-shift-select t)
+;;(add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/lisp")
+;;(add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/contribe/lisp")
+;;(setq org-support-shift-select t)
 
 ;; json-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/json-mode-master")
