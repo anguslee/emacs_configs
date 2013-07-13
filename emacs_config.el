@@ -60,7 +60,7 @@
 ;; malabar
 (add-to-list 'load-path "~/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lisp")
 (require 'malabar-mode)
-(setq malabar-groovy-lib-dir "/Users/apple/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lib")
+(setq malabar-groovy-lib-dir "~/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lib")
 (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 (add-to-list 'auto-mode-alist '("\\.groovy\\'" . malabar-mode))
 (add-hook 'malabar-mode-hook
@@ -162,9 +162,9 @@
  )
 
 ;; auto-complete-mode:
-(add-to-list 'load-path "/Users/apple/.emacs.d/site-lisp/")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "/Users/apple/.emacs.d/site-lisp/ac-dict")
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/ac-dict")
 (ac-config-default)
 (global-set-key [(control c) (a) (c)] 'auto-complete-mode)
 

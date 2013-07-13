@@ -1878,7 +1878,7 @@ This workaround avoid flyspell processes when auto completion is being started."
                            (loop for dir in ac-dictionary-directories
                                  for file = (concat dir "/" name)
                                  if (file-exists-p file)
-                                 return file))
+                                 return (file-truename file)))
                          (list (symbol-name major-mode)
                                (ignore-errors
                                  (file-name-extension (buffer-file-name))))))))
@@ -1895,3 +1895,4 @@ This workaround avoid flyspell processes when auto completion is being started."
 
 (provide 'auto-complete)
 ;;; auto-complete.el ends here
+

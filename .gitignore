@@ -2,3 +2,5 @@
 *.elc
 CVS
 .svn
+ede-projects.el
+elisp-git
