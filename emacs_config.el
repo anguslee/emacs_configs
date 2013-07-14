@@ -135,7 +135,7 @@
 
 
 ;; ecb
-(add-to-list 'load-path "~/.emacs.d/elisp-git/ecb")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/ecb")
 (setq stack-trace-on-error t)
 (require 'ecb)
 
