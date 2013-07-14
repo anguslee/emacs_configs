@@ -144,8 +144,8 @@
       ecb-tip-of-the-day nil
  )
 ;; ecb Hot-key binding:
-(global-set-key [(f9)] 'ecb-activate)
-(global-set-key [(f12)] 'ecb-deactivate)
+(global-set-key [(control f9)] 'ecb-activate)
+(global-set-key [(control f12)] 'ecb-deactivate)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
