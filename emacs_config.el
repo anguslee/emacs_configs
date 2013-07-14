@@ -253,9 +253,9 @@
 ;; (setq TeX-PDF-mode t)
 
 ;; org-mode
-;;(add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/lisp")
-;;(add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/contribe/lisp")
-;;(setq org-support-shift-select t)
+;(add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/lisp")
+;(add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/contribe/lisp")
+;(setq org-support-shift-select t)
 
 ;; json-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/json-mode-master")
