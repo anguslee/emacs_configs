@@ -146,7 +146,6 @@
 ;; ecb Hot-key binding:
 (if (eq system-type 'darwin)
   (progn
-    (global-set-key [(control f11)] 'git-status)
     (global-set-key [(control f9)] 'ecb-activate)
     (global-set-key [(control f12)] 'ecb-deactivate))
   (progn 
@@ -159,7 +158,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(current-language-environment "UTF-8")
- '(ecb-options-version "2.40-cedet")
+ '(ecb-options-version "2.40")
  '(safe-local-variable-values (quote ((Base . 10) (Package . HUNCHENTOOT) (Syntax . COMMON-LISP) (encoding . utf-8)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -186,7 +185,9 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/git")
 (require 'git)
 (require 'git-blame)
-(global-set-key [(f11)] 'git-status)
+(if (eq system-type 'darwin)
+  (global-set-key [(control f11)] 'git-status)
+  (global-set-key [(f11)] 'git-status))
 
 ;; multi-eshell
 (require 'multi-eshell)
