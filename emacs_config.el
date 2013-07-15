@@ -144,15 +144,21 @@
       ecb-tip-of-the-day nil
  )
 ;; ecb Hot-key binding:
-(global-set-key [(control f9)] 'ecb-activate)
-(global-set-key [(control f12)] 'ecb-deactivate)
+(if (eq system-type 'darwin)
+  (progn 
+    (global-set-key [(control f9)] 'ecb-activate)
+    (global-set-key [(control f12)] 'ecb-deactivate))
+  (progn 
+    (global-set-key [(f9)] 'ecb-activate)
+    (global-set-key [(f12)] 'ecb-deactivate)))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(current-language-environment "UTF-8")
- '(ecb-options-version "2.40")
+ '(ecb-options-version "2.40-cedet")
  '(safe-local-variable-values (quote ((Base . 10) (Package . HUNCHENTOOT) (Syntax . COMMON-LISP) (encoding . utf-8)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
