@@ -145,7 +145,8 @@
  )
 ;; ecb Hot-key binding:
 (if (eq system-type 'darwin)
-  (progn 
+  (progn
+    (global-set-key [(control f11)] 'git-status)
     (global-set-key [(control f9)] 'ecb-activate)
     (global-set-key [(control f12)] 'ecb-deactivate))
   (progn 
