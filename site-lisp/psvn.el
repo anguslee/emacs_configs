@@ -419,7 +419,12 @@ The supported functions are `svn-status' and `svn-status-set-user-mark'."
               (function-item svn-status-set-user-mark))
   :group 'psvn)
 
-(defcustom svn-status-svn-executable "svn"
+(defcustom svn-status-svn-executable
+  ;; Work around for the v1.6 svn shipped with xcode. Prefer v1.7+ shipped with brew
+  (if (and (eq system-type 'darwin)
+           (file-exists-p "/usr/local/bin/svn"))
+      "/usr/local/bin/svn"
+      "svn")
   "*The name of the svn executable.
 This can be either absolute or looked up on `exec-path'."
   ;; Don't use (file :must-match t).  It doesn't know about `exec-path'.
