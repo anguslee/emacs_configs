@@ -179,7 +179,9 @@
 
 ;; svn:
 (require 'psvn)
-(global-set-key [(f8)] 'svn-status)
+(if (eq system-type 'darwin)
+  (global-set-key [(control f10)] 'svn-status)  
+  (global-set-key [(f8)] 'svn-status))
 
 ;; git
 (add-to-list 'load-path "~/.emacs.d/site-lisp/git")
