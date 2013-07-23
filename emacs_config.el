@@ -115,7 +115,7 @@
 (global-set-key [(f5)] 'gdb)
 (global-set-key [(f7)] 'compile)
 (define-key c-mode-base-map [(control x) (t)] 'eassist-switch-h-cpp) ;override toggle-source()
-(define-key c-mode-base-map [(control c) (u)] 'uncomment-region)
+;; (define-key c-mode-base-map [(control c) (u)] 'uncomment-region)
 (define-key c-mode-base-map [(meta \`)] 'c-indent-command)
 
 (setq-mode-local c-mode
@@ -206,8 +206,8 @@
 (require 'lua-mode)
 (add-hook 'lua-mode-hook 'turn-on-font-lock)
 (add-hook 'lua-mode-hook 'auto-complete-mode)
-(define-key lua-mode-map [(control c) (u)] 'uncomment-region)
-(define-key lua-mode-map [(control c) (c)] 'comment-region)
+;;(define-key lua-mode-map [(control c) (u)] 'uncomment-region)
+;;(define-key lua-mode-map [(control c) (c)] 'comment-region)
 
 
 ;; Dired custom keymappings
@@ -276,3 +276,7 @@
 ;; json-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/json-mode-master")
 (require 'json-mode)
+
+;; global key bindings
+(global-set-key [(control c) (u) (r)] 'uncomment-region)
+(global-set-key [(control c) (c) (r)] 'comment-region)
