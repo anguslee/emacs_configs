@@ -6091,17 +6091,18 @@ You can send raw data to the process via \\[svn-process-send-string]."
 Return nil, if not in a svn working copy."
   (let* ((start-dir (expand-file-name (or start-directory default-directory)))
          (base-dir (gethash start-dir svn-status-base-dir-cache 'not-found)))
-    ;;(message "svn-status-base-dir: %S %S" start-dir base-dir)
+    (message "svn-status-base-dir: %S %S" start-dir base-dir)
     (if (not (eq base-dir 'not-found))
         base-dir
-      ;; (message "calculating base-dir for %s" start-dir)
+      (message "calculating base-dir for %s" start-dir)
       (svn-compute-svn-client-version)
       (let* ((base-dir start-dir)
              (repository-root (svn-status-repo-for-path base-dir))
-             (dot-svn-dir (concat base-dir (svn-wc-adm-dir-name)))
+             (dot-svn-dir (locate-dominating-file dir
+                              (svn-wc-adm-dir-name)))
              (in-tree (and repository-root (file-exists-p dot-svn-dir)))
              (dir-below (expand-file-name base-dir)))
-        ;; (message "repository-root: %s start-dir: %s" repository-root start-dir)
+        (message "repository-root: %s start-dir: %s" repository-root start-dir)
         (if (and (<= (car svn-client-version) 1) (< (cadr svn-client-version) 3))
             (setq base-dir (svn-status-base-dir-for-ancient-svn-client start-dir)) ;; svn version < 1.3
           (while (when (and dir-below (file-exists-p dot-svn-dir))
@@ -6110,7 +6111,7 @@ Return nil, if not in a svn working copy."
                    (setq dir-below
                          (and (string-match "\\(.*/\\)[^/]+/" dir-below)
                               (match-string 1 dir-below)))
-                   ;; (message "base-dir: %s, dir-below: %s, dot-svn-dir: %s in-tree: %s" base-dir dir-below dot-svn-dir in-tree)
+                   (message "base-dir: %s, dir-below: %s, dot-svn-dir: %s in-tree: %s" base-dir dir-below dot-svn-dir in-tree)
                    (when dir-below
                      (if (string= (svn-status-repo-for-path dir-below) repository-root)
                          (setq dot-svn-dir (concat dir-below (svn-wc-adm-dir-name)))
