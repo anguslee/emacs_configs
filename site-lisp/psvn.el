@@ -6091,10 +6091,10 @@ You can send raw data to the process via \\[svn-process-send-string]."
 Return nil, if not in a svn working copy."
   (let* ((start-dir (expand-file-name (or start-directory default-directory)))
          (base-dir (gethash start-dir svn-status-base-dir-cache 'not-found)))
-    (message "svn-status-base-dir: %S %S" start-dir base-dir)
+    ;; (message "svn-status-base-dir: %S %S" start-dir base-dir)
     (if (not (eq base-dir 'not-found))
         base-dir
-      (message "calculating base-dir for %s" start-dir)
+      ;; (message "calculating base-dir for %s" start-dir)
       (svn-compute-svn-client-version)
       (let* ((base-dir start-dir)
              (repository-root (svn-status-repo-for-path base-dir))
