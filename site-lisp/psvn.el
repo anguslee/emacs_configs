@@ -420,11 +420,7 @@ The supported functions are `svn-status' and `svn-status-set-user-mark'."
   :group 'psvn)
 
 (defcustom svn-status-svn-executable
-  ;; Work around for the v1.6 svn shipped with xcode. Prefer v1.7+ shipped with brew
-  (if (and (eq system-type 'darwin)
-           (file-exists-p "/usr/local/bin/svn"))
-      "/usr/local/bin/svn"
-      "svn")
+  "svn"
   "*The name of the svn executable.
 This can be either absolute or looked up on `exec-path'."
   ;; Don't use (file :must-match t).  It doesn't know about `exec-path'.
@@ -6102,7 +6098,7 @@ Return nil, if not in a svn working copy."
                               (svn-wc-adm-dir-name)))
              (in-tree (and repository-root (file-exists-p dot-svn-dir)))
              (dir-below (expand-file-name base-dir)))
-        (message "repository-root: %s start-dir: %s" repository-root start-dir)
+        ;; (message "repository-root: %s start-dir: %s" repository-root start-dir)
         (if (and (<= (car svn-client-version) 1) (< (cadr svn-client-version) 3))
             (setq base-dir (svn-status-base-dir-for-ancient-svn-client start-dir)) ;; svn version < 1.3
           (while (when (and dir-below (file-exists-p dot-svn-dir))
@@ -6111,7 +6107,7 @@ Return nil, if not in a svn working copy."
                    (setq dir-below
                          (and (string-match "\\(.*/\\)[^/]+/" dir-below)
                               (match-string 1 dir-below)))
-                   (message "base-dir: %s, dir-below: %s, dot-svn-dir: %s in-tree: %s" base-dir dir-below dot-svn-dir in-tree)
+                   ;; (message "base-dir: %s, dir-below: %s, dot-svn-dir: %s in-tree: %s" base-dir dir-below dot-svn-dir in-tree)
                    (when dir-below
                      (if (string= (svn-status-repo-for-path dir-below) repository-root)
                          (setq dot-svn-dir (concat dir-below (svn-wc-adm-dir-name)))
