@@ -32,6 +32,9 @@
        (color-theme-deep-blue)
 ))
 
+;; eassist
+(require 'eassist)
+
 
 ;; cscope:
 (setq cscope-do-not-update-database t)
