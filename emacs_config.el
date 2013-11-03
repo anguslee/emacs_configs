@@ -221,13 +221,13 @@
 
 
 ;; slime & lisp mode
-(setq inferior-lisp-program "sbcl")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/slime/")
-(require 'slime-autoloads)
-(slime-setup)
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-(add-hook 'lisp-mode-hook 'auto-complete-mode)
-(define-key lisp-mode-map [(return)] 'newline-and-indent)
+;(setq inferior-lisp-program "sbcl")
+;(add-to-list 'load-path "~/.emacs.d/site-lisp/slime/")
+;(require 'slime-autoloads)
+;(slime-setup)
+;(load (expand-file-name "~/quicklisp/slime-helper.el"))
+;(add-hook 'lisp-mode-hook 'auto-complete-mode)
+;(define-key lisp-mode-map [(return)] 'newline-and-indent)
 
 ;; emacs-nav
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-nav")
