@@ -25,7 +25,7 @@
 
 
 ;; color themes:
-(add-to-list 'load-path' "~/.emacs.d/site-lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
 (load-file "~/.emacs.d/site-lisp/color-theme.el")
 (require 'color-theme)
 (cond (window-system
