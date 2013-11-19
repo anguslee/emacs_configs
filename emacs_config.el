@@ -5,32 +5,26 @@
 (setq x-select-enable-clipboard t)
 (set-language-environment "UTF-8")
 
-;; package
+;; auto-complete-mode:
+(add-to-list 'load-path "~/.emacs.d/site-lisp/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/ac-dict")
+(ac-config-default)
+(global-set-key [(control c) (a) (c)] 'auto-complete-mode)
+
+;; install packages
 (require 'package)
 (add-to-list 'package-archives 
              '("marmalade" .
                "http://marmalade-repo.org/packages/"))
 (package-initialize)
-
-;; cider
-(unless (package-installed-p 'cider)
-  (package-install 'cider))
-
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-(setq nrepl-hide-special-buffers t)
-(setq cider-repl-pop-to-buffer-on-connect nil)
-(setq cider-popup-stacktraces nil)
-(setq cider-auto-select-error-buffer t)
-(setq nrepl-buffer-name-show-port t)
-(setq cider-repl-display-in-current-window t)
-(setq cider-repl-wrap-history t)
-
-(add-hook 'cider-repl-mode-hook 'subword-mode)
+(defvar my-packages
+  '(paredit smartparens cider rainbow-delimiters))
+(dolist (p my-packages)
+  (unless (package-installed-p p)
+    (package-install p)))
 
 ;; paredit
-(unless (package-installed-p 'paredit)
-  (package-install 'paredit))
-
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
@@ -38,6 +32,25 @@
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+
+;; rainbow-delimiters
+(global-rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+;; cider
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(setq nrepl-hide-special-buffers t)
+(setq cider-repl-pop-to-buffer-on-connect t)
+(setq cider-popup-stacktraces nil)
+(setq cider-auto-select-error-buffer t)
+(setq nrepl-buffer-name-show-port t)
+(setq cider-repl-display-in-current-window t)
+(setq cider-repl-wrap-history t)
+
+(add-hook 'cider-repl-mode-hook 'subword-mode)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
+(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'cider-repl-mode-hook 'auto-complete-mode)
 
 ;; character encoding auto-detection:
 (load-file "~/.emacs.d/site-lisp/unicad.el")
@@ -50,12 +63,8 @@
 ;; default to unified diffs
 (setq diff-switches "-u")
 
-;;; uncomment for CJK utf-8 support for non-Asian users
-;; (require 'un-define)
-
 (column-number-mode t)
 (setq default-directory "~/Documents/Workspace")
-
 
 ;; color themes:
 (add-to-list 'load-path' "~/.emacs.d/site-lisp")
@@ -106,6 +115,7 @@
 (add-hook 'malabar-mode-hook (function cscope:hook))
 (add-hook 'malabar-mode-hook 'auto-complete-mode)
 (add-hook 'malabar-mode-hook 'subword-mode)
+(add-hook 'malabar-mode-hook 'rainbow-delimiters-mode)
 
 ;; cc-mode
 (require 'cc-mode)
@@ -204,12 +214,6 @@
  ;; If there is more than one, they won't work right.
  )
 
-;; auto-complete-mode:
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/ac-dict")
-(ac-config-default)
-(global-set-key [(control c) (a) (c)] 'auto-complete-mode)
 
 ;; shortcut for ediff-buffers
 (global-set-key [(control c) (d) (f)] 'ediff-buffers)
