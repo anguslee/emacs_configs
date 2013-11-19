@@ -1,10 +1,31 @@
 ;; .emacs
 
-
 (setq-default tab-width 4 indent-tabs-mode nil)
 (setq c-basic-offset 4)
 (setq x-select-enable-clipboard t)
 (set-language-environment "UTF-8")
+
+;; package
+(require 'package)
+(add-to-list 'package-archives 
+             '("marmalade" .
+               "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+;; cider
+(unless (package-installed-p 'cider)
+  (package-install 'cider))
+
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(setq nrepl-hide-special-buffers t)
+(setq cider-repl-pop-to-buffer-on-connect nil)
+(setq cider-popup-stacktraces nil)
+(setq cider-auto-select-error-buffer t)
+(setq nrepl-buffer-name-show-port t)
+(setq cider-repl-display-in-current-window t)
+(setq cider-repl-wrap-history t)
+
+(add-hook 'cider-repl-mode-hook 'subword-mode)
 
 ;; character encoding auto-detection:
 (load-file "~/.emacs.d/site-lisp/unicad.el")
@@ -21,7 +42,7 @@
 ;; (require 'un-define)
 
 (column-number-mode t)
-(setq default-directory "~/Workspace/")
+(setq default-directory "~/Documents/Workspace")
 
 
 ;; color themes:
@@ -72,6 +93,7 @@
                        nil t)))
 (add-hook 'malabar-mode-hook (function cscope:hook))
 (add-hook 'malabar-mode-hook 'auto-complete-mode)
+(add-hook 'malabar-mode-hook 'subword-mode)
 
 ;; cc-mode
 (require 'cc-mode)
@@ -219,6 +241,9 @@
 ;; Tramp
 (setq tramp-default-method "ssh")
 
+;; clojure mode
+(autoload 'clojure-mode "clojure-mode" "A major mode for Clojure" t)
+(add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
 
 ;; slime & lisp mode
 (setq inferior-lisp-program "sbcl")
