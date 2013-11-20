@@ -4,9 +4,9 @@
 (setq c-basic-offset 4)
 (setq x-select-enable-clipboard t)
 (set-language-environment "UTF-8")
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
 
 ;; auto-complete-mode:
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/ac-dict")
 (ac-config-default)
@@ -18,6 +18,7 @@
              '("marmalade" .
                "http://marmalade-repo.org/packages/"))
 (package-initialize)
+(package-refresh-contents)
 (defvar my-packages
   '(paredit smartparens cider rainbow-delimiters))
 (dolist (p my-packages)
@@ -64,10 +65,9 @@
 (setq diff-switches "-u")
 
 (column-number-mode t)
-(setq default-directory "~/Documents/Workspace")
+(setq default-directory "~/Workspace")
 
 ;; color themes:
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
 (load-file "~/.emacs.d/site-lisp/color-theme.el")
 (require 'color-theme)
 (cond (window-system
@@ -121,7 +121,6 @@
 (require 'cc-mode)
 
 ;; google-c-style
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
