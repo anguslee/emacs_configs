@@ -65,7 +65,7 @@
 (setq diff-switches "-u")
 
 (column-number-mode t)
-(setq default-directory "~")
+(setq default-directory "~/")
 
 ;; color themes:
 (load-file "~/.emacs.d/site-lisp/color-theme.el")
