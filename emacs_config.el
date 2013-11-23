@@ -18,7 +18,7 @@
              '("marmalade" .
                "http://marmalade-repo.org/packages/"))
 (package-initialize)
-(package-refresh-contents)
+; (package-refresh-contents)
 (defvar my-packages
   '(paredit smartparens cider rainbow-delimiters))
 (dolist (p my-packages)
@@ -65,7 +65,7 @@
 (setq diff-switches "-u")
 
 (column-number-mode t)
-(setq default-directory "~/Workspace")
+(setq default-directory "~")
 
 ;; color themes:
 (load-file "~/.emacs.d/site-lisp/color-theme.el")
@@ -116,6 +116,7 @@
 (add-hook 'malabar-mode-hook 'auto-complete-mode)
 (add-hook 'malabar-mode-hook 'subword-mode)
 (add-hook 'malabar-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'malabar-mode-hook #'enable-paredit-mode)
 
 ;; cc-mode
 (require 'cc-mode)
@@ -261,7 +262,7 @@
 (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
 
 ;; slime & lisp mode
-(setq inferior-lisp-program "sbcl")
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/slime/")
 (require 'slime-autoloads)
 (slime-setup)
