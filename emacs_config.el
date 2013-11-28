@@ -116,7 +116,7 @@
 (add-hook 'malabar-mode-hook 'auto-complete-mode)
 (add-hook 'malabar-mode-hook 'subword-mode)
 (add-hook 'malabar-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'malabar-mode-hook #'enable-paredit-mode)
+; (add-hook 'malabar-mode-hook #'enable-paredit-mode)
 
 ;; cc-mode
 (require 'cc-mode)
