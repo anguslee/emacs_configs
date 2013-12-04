@@ -287,7 +287,7 @@
 (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
 
 ;; slime & lisp mode
-(setq inferior-lisp-program "/usr/local/bin/sbcl")
+(setq inferior-lisp-program "sbcl")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/slime/")
 (require 'slime-autoloads)
 (slime-setup)
