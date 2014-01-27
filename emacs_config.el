@@ -239,6 +239,12 @@
  ;; If there is more than one, they won't work right.
  )
 
+(if (eq system-type 'darwin)
+    (progn
+      (setq exec-path
+          (append exec-path '("/usr/local/texlive/2013/bin/x86_64-darwin" "/usr/local/bin")))
+      (setenv "PATH" (concat "/usr/local/texlive/2013/bin/x86_64-darwin:" "/usr/local/bin:" (getenv "PATH"))))
+    )
 
 ;; shortcut for ediff-buffers
 (global-set-key [(control c) (d) (f)] 'ediff-buffers)
