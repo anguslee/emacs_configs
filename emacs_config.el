@@ -20,7 +20,7 @@
 (package-initialize)
 ; (package-refresh-contents)
 (defvar my-packages
-  '(paredit smartparens cider rainbow-delimiters))
+  '(paredit smartparens cider rainbow-delimiters auctex))
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (package-install p)))
@@ -326,20 +326,10 @@
 
 
 ;; auctex
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auctex")
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auctex/auctex")
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auctex/preview")
-;; (load "preview-latex.el" nil t t)
-;; (load "latex.el")
-;; (setq TeX-auto-save t) 
-;; (setq TeX-parse-self t) 
-;; (setq TeX-save-query nil)
-;; (setq TeX-PDF-mode t)
-
-;; org-mode
-;(add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/lisp")
-;(add-to-list 'load-path "~/.emacs.d/elisp-git/org-mode/contribe/lisp")
-;(setq org-support-shift-select t)
+(setq TeX-auto-save t)
+(setq TeX-parse-self t) 
+(setq TeX-PDF-mode t)
+(add-hook 'TeX-mode-hook 'auto-complete-mode)
 
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
@@ -350,6 +340,7 @@
 ;; json-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/json-mode-master")
 (require 'json-mode)
+
 
 ;; global key bindings
 (global-set-key [(control c) (u) (r)] 'uncomment-region)
