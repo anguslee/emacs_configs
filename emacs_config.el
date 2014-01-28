@@ -12,6 +12,20 @@
 (ac-config-default)
 (global-set-key [(control c) (a) (c)] 'auto-complete-mode)
 
+;; predictive-mode
+(add-to-list 'load-path "~/.emacs.d/site-lisp/predictive")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/predictive/misc")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/predictive/texinfo")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/predictive/latex")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/predictive/html")
+(autoload 'predictive-mode "predictive" "predictive" t)
+(set-default 'predictive-auto-add-to-dict t)
+(setq predictive-auto-learn t
+      predictive-add-to-dict-ask nil
+      predictive-use-auto-learn-cache nil
+      predictive-which-dict t)
+(require 'predictive)
+
 ;; install packages
 (require 'package)
 (add-to-list 'package-archives 
@@ -338,7 +352,7 @@
 (setq TeX-auto-save t)
 (setq TeX-parse-self t) 
 (setq TeX-PDF-mode t)
-(add-hook 'TeX-mode-hook 'auto-complete-mode)
+(add-hook 'TeX-mode-hook 'predictive-mode)
 
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
