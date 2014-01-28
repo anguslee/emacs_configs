@@ -243,7 +243,11 @@
     (progn
       (setq exec-path
           (append exec-path '("/usr/local/texlive/2013/bin/x86_64-darwin" "/usr/local/bin")))
-      (setenv "PATH" (concat "/usr/local/texlive/2013/bin/x86_64-darwin:" "/usr/local/bin:" (getenv "PATH")))))
+      (setenv "PATH" (concat "/usr/local/texlive/2013/bin/x86_64-darwin:" "/usr/local/bin:" (getenv "PATH"))))
+  (progn
+    (setq exec-path
+          (append exec-path '("/usr/local/texlive/2013/bin/x86_64-linux" "/usr/local/bin")))
+    (setenv "PATH" (concat "/usr/local/texlive/2013/bin/x86_64-linux:" "/usr/local/bin:" (getenv "PATH")))))
 
 ;; shortcut for ediff-buffers
 (global-set-key [(control c) (d) (f)] 'ediff-buffers)
