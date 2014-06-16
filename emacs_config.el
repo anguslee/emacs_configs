@@ -364,7 +364,9 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/json-mode-master")
 (require 'json-mode)
 
-
 ;; global key bindings
 (global-set-key [(control c) (u) (r)] 'uncomment-region)
 (global-set-key [(control c) (c) (r)] 'comment-region)
+
+;; auto-mode-alist for cql
+(setq auto-mode-alist (cons '("\\.cql$" . sql-mode) auto-mode-alist))
