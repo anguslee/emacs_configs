@@ -34,7 +34,7 @@
 (package-initialize)
 ; (package-refresh-contents)
 (defvar my-packages
-  '(paredit smartparens cider rainbow-delimiters auctex))
+  '(paredit smartparens cider rainbow-delimiters auctex php-mode))
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (package-install p)))
@@ -159,6 +159,9 @@
 
 ;; cc-mode
 (require 'cc-mode)
+
+;; php-mode
+(require 'php-mode)
 
 ;; google-c-style
 (require 'google-c-style)
