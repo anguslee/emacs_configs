@@ -4,3 +4,8 @@ CVS
 .svn
 ede-projects.el
 elisp-git
+
+site-lisp/predictive/dict-english.el
+site-lisp/predictive/latex/dict-latex-env.el
+site-lisp/predictive/latex/dict-latex-math.el
+site-lisp/predictive/latex/dict-latex.el
