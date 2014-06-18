@@ -31,10 +31,13 @@
 (add-to-list 'package-archives 
              '("marmalade" .
                "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" .
+               "http://melpa.milkbox.net/packages/"))
 (package-initialize)
 ; (package-refresh-contents)
 (defvar my-packages
-  '(paredit smartparens cider rainbow-delimiters auctex php-mode))
+  '(paredit smartparens cider rainbow-delimiters auctex php-mode scala-mode2))
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (package-install p)))
@@ -373,3 +376,6 @@
 
 ;; auto-mode-alist for cql
 (setq auto-mode-alist (cons '("\\.cql$" . sql-mode) auto-mode-alist))
+
+;; scala mode
+(require 'scala-mode2)
