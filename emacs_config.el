@@ -31,10 +31,13 @@
 (add-to-list 'package-archives 
              '("marmalade" .
                "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" .
+               "http://melpa.milkbox.net/packages/"))
 (package-initialize)
 ; (package-refresh-contents)
 (defvar my-packages
-  '(paredit smartparens cider rainbow-delimiters auctex php-mode jabber))
+  '(paredit smartparens cider rainbow-delimiters auctex php-mode jabber scala-mode2))
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (package-install p)))
@@ -367,7 +370,6 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/json-mode-master")
 (require 'json-mode)
 
-
 ;; global key bindings
 (global-set-key [(control c) (u) (r)] 'uncomment-region)
 (global-set-key [(control c) (c) (r)] 'comment-region)
@@ -386,3 +388,8 @@
                             "qunarpackage@conference.l-im1.vy.corp.qunar.com"
                             "qunarfe@conference.l-im1.vy.corp.qunar.com"
                             "qunarqa@conference.l-im1.vy.corp.qunar.com"))
+;; auto-mode-alist for cql
+(setq auto-mode-alist (cons '("\\.cql$" . sql-mode) auto-mode-alist))
+
+;; scala mode
+(require 'scala-mode2)
