@@ -28,19 +28,19 @@
 
 ;; install packages
 (require 'package)
-(add-to-list 'package-archives 
-             '("marmalade" .
-               "http://marmalade-repo.org/packages/"))
+;(add-to-list 'package-archives 
+;             '("marmalade" .
+;               "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
              '("melpa" .
                "http://melpa.milkbox.net/packages/"))
 (package-initialize)
 ; (package-refresh-contents)
 (defvar my-packages
-  '(paredit smartparens cider rainbow-delimiters auctex php-mode scala-mode2))
+ '(paredit smartparens cider rainbow-delimiters auctex scala-mode2 ensime malabar-mode))
 (dolist (p my-packages)
-  (unless (package-installed-p p)
-    (package-install p)))
+ (unless (package-installed-p p)
+   (package-install p)))
 
 ;; paredit
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
@@ -120,9 +120,13 @@
 ;; (semantic-add-system-include "/usr/include/" 'c-mode)
 
 ;; malabar
-(add-to-list 'load-path "~/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lisp")
+; (add-to-list 'load-path "~/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lisp")
+(require 'cedet)
+(require 'semantic)
+(load "semantic/loaddefs.el")
+(semantic-mode 1);;
 (require 'malabar-mode)
-(setq malabar-groovy-lib-dir "~/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lib")
+; (setq malabar-groovy-lib-dir "~/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lib")
 (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 (add-to-list 'auto-mode-alist '("\\.groovy\\'" . malabar-mode))
 (add-hook 'malabar-mode-hook
@@ -379,3 +383,9 @@
 
 ;; scala mode
 (require 'scala-mode2)
+(setq scala-indent:step 4)
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/ensime/src/main/elisp")
+;; (require 'ensime)
+;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
