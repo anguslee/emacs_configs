@@ -5,7 +5,7 @@ CVS
 ede-projects.el
 elisp-git
 
-site-lisp/predictive/dict-english.el
-site-lisp/predictive/latex/dict-latex-env.el
-site-lisp/predictive/latex/dict-latex-math.el
-site-lisp/predictive/latex/dict-latex.el
+dict-english.el
+dict-latex-env.el
+dict-latex-math.el
+dict-latex.el
