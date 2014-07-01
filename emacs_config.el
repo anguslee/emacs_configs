@@ -37,7 +37,7 @@
 (package-initialize)
 ; (package-refresh-contents)
 (defvar my-packages
- '(paredit smartparens cider rainbow-delimiters auctex scala-mode2 ensime malabar-mode))
+  '(paredit smartparens cider rainbow-delimiters auctex scala-mode2 ensime malabar-mode))
 (dolist (p my-packages)
  (unless (package-installed-p p)
    (package-install p)))
@@ -378,6 +378,20 @@
 (global-set-key [(control c) (u) (r)] 'uncomment-region)
 (global-set-key [(control c) (c) (r)] 'comment-region)
 
+;; qunar jabber chat
+(setq jabber-invalid-certificate-servers '("l-im1.vy.corp.qunar.com"))
+(setq jabber-account-list
+      '(("angus@l-im1.vy.corp.qunar.com"
+         (:network-server . "l-im1.s.corp.qunar.com")
+         (:port . "5222")
+         ;(:connection-type . starttls)
+         )))
+
+(setq jabber-muc-autojoin '("qunar群聊@conference.l-im1.vy.corp.qunar.com"
+                            "qunarpgsql@conference.l-im1.vy.corp.qunar.com"
+                            "qunarpackage@conference.l-im1.vy.corp.qunar.com"
+                            "qunarfe@conference.l-im1.vy.corp.qunar.com"
+                            "qunarqa@conference.l-im1.vy.corp.qunar.com"))
 ;; auto-mode-alist for cql
 (setq auto-mode-alist (cons '("\\.cql$" . sql-mode) auto-mode-alist))
 
