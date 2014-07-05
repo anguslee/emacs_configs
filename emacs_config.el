@@ -398,8 +398,9 @@
 ;; scala mode
 (require 'scala-mode2)
 (setq scala-indent:step 4)
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/ensime/src/main/elisp")
-;; (require 'ensime)
-;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-(require 'ensime)
+(define-key scala-mode-map [(return)] 'newline-and-indent)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+(add-hook 'scala-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'scala-mode-hook 'subword-mode)
+
+(require 'ensime)
