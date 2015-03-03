@@ -404,3 +404,6 @@
 (add-hook 'scala-mode-hook 'subword-mode)
 
 (require 'ensime)
+
+;; mit-scheme
+(require 'xscheme)
