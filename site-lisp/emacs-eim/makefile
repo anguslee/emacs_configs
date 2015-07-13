@@ -1,7 +1,7 @@
 ###################################
 # user customized variables
 EMACS = emacs
-PREFIX = /home/angus/.emacs.d/site-lisp
+PREFIX = $$HOME/local
 ###################################
 
 ###################################
