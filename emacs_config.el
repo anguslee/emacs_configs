@@ -270,7 +270,7 @@
       (setenv "PATH" (concat "/usr/local/texlive/2013/bin/x86_64-darwin:" "/usr/local/bin:" (getenv "PATH"))))
   (progn
     (setq exec-path
-          (append exec-path '("/usr/local/texlive/2013/bin/x86_64-linux" "/usr/local/bin")))
+          (append exec-path '("/usr/local/texlive/2013/bin/x86_64-linux" "/usr/local/bin" "/opt/Qt5.4.1/5.4/gcc_64/bin")))
     (setenv "PATH" (concat "/usr/local/texlive/2013/bin/x86_64-linux:" "/usr/local/bin:" (getenv "PATH")))))
 
 ;; shortcut for ediff-buffers
@@ -337,21 +337,6 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-nav")
 (require 'nav)
 
-;; eim
-(add-to-list 'load-path "~/.emacs.d/site-lisp/eim-2.4")
-(autoload 'eim-use-package "eim" "Another emacs input method")
-(setq eim-use-tooltip nil)
-
-(register-input-method
- "eim-wb" "euc-cn" 'eim-use-package
- "五笔" "汉字五笔输入法" "wb.txt")
-(register-input-method
- "eim-py" "euc-cn" 'eim-use-package
- "拼音" "汉字拼音输入法" "py.txt")
-
-;; 用 ; 暂时输入英文
-(require 'eim-extra)
-(global-set-key ";" 'eim-insert-ascii)
 
 ;; restclient
 (add-to-list 'load-path "~/.emacs.d/site-lisp/restclient")
@@ -378,20 +363,6 @@
 (global-set-key [(control c) (u) (r)] 'uncomment-region)
 (global-set-key [(control c) (c) (r)] 'comment-region)
 
-;; qunar jabber chat
-(setq jabber-invalid-certificate-servers '("l-im1.vy.corp.qunar.com"))
-(setq jabber-account-list
-      '(("angus@l-im1.vy.corp.qunar.com"
-         (:network-server . "l-im1.s.corp.qunar.com")
-         (:port . "5222")
-         ;(:connection-type . starttls)
-         )))
-
-(setq jabber-muc-autojoin '("qunar群聊@conference.l-im1.vy.corp.qunar.com"
-                            "qunarpgsql@conference.l-im1.vy.corp.qunar.com"
-                            "qunarpackage@conference.l-im1.vy.corp.qunar.com"
-                            "qunarfe@conference.l-im1.vy.corp.qunar.com"
-                            "qunarqa@conference.l-im1.vy.corp.qunar.com"))
 ;; auto-mode-alist for cql
 (setq auto-mode-alist (cons '("\\.cql$" . sql-mode) auto-mode-alist))
 
