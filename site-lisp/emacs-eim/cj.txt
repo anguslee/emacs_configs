@@ -9,14 +9,8 @@ other-files=wbpy.txt
 page-length=3
 
 [Punctuation]
-{ 『
-| ÷
-} 』
-~ ～
 ` ・
 ! ！
-# ＃
-$ ￥
 % ％
 & ※
 ( （
@@ -33,13 +27,10 @@ $ ￥
 = ＝
 > 》
 ? ？
-@ ◎
 [ 【
 ] 】
 ^ ……
 _ ──
-" “ ”
-' ‘ ’
 
 [Table]
 a 日 曰

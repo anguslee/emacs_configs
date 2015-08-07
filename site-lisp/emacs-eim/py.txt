@@ -13,14 +13,8 @@ lib=eim-py.el
 other-files=otherpy.txt
 
 [Punctuation]
-{ 『
-| ÷
-} 』
-~ ～
 ` ・
 ! ！
-# ＃
-$ ￥
 % ％
 & ※
 ( （
@@ -37,13 +31,10 @@ $ ￥
 = ＝
 > 》
 ? ？
-@ ◎
 [ 【
 ] 】
 ^ ……
 _ ――
-" “ ”
-' ‘ ’
 
 [Table]
 a 阿 啊 呵 嗄 腌 锕 吖

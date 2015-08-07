@@ -14,14 +14,9 @@ lib=eim-eb
 other-files=ebpy.txt
 
 [Punctuation]
-{ 『
-| ÷
-} 』
 ~ ～
 ` ・
 ! ！
-# ＃
-$ ￥
 % ％
 & ※
 ( （
@@ -37,12 +32,9 @@ $ ￥
 = ＝
 > 》
 ? ？
-@ ◎
 ] 】
 ^ ……
 _ ——
-" “ ”
-' ‘ ’
 
 [Table]
 a 安
