@@ -6,11 +6,29 @@
 (set-language-environment "UTF-8")
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 
+
+
+;; install packages
+(require 'package)
+;; (add-to-list 'package-archives
+;;              '("melpa" .
+;;                "https://melpa.org/packages/"))
+
+; (package-refresh-contents)
+(package-initialize)
+(defvar my-packages
+  '(paredit smartparens rainbow-delimiters auctex scala-mode2 malabar-mode noflet uuid))
+(dolist (p my-packages)
+  (unless (package-installed-p p)
+    (package-install p)))
+
+;; popup
+(add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
+
 ;; auto-complete-mode:
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/ac-dict")
 (ac-config-default)
-(global-set-key [(control c) (a) (c)] 'auto-complete-mode)
 
 ;; predictive-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/predictive")
@@ -26,21 +44,6 @@
       predictive-which-dict t)
 (require 'predictive)
 
-;; install packages
-(require 'package)
-;(add-to-list 'package-archives 
-;             '("marmalade" .
-;               "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa" .
-               "http://melpa.milkbox.net/packages/"))
-(package-initialize)
-; (package-refresh-contents)
-(defvar my-packages
-  '(paredit smartparens cider rainbow-delimiters auctex scala-mode2 ensime malabar-mode))
-(dolist (p my-packages)
- (unless (package-installed-p p)
-   (package-install p)))
 
 ;; paredit
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
@@ -52,7 +55,6 @@
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
 ;; rainbow-delimiters
-(global-rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ;; cider
@@ -112,31 +114,29 @@
         (expand-file-name "/") ) )
 (setq semanticdb-default-save-directory "~/.semantic")
 (setq semanticdb-search-system-databases t)
-(when (require 'ede nil t)
-  (global-ede-mode t)) 
+;; (when (require 'ede nil t)
+;;   (global-ede-mode t)) 
 
 ;; Customize system include paths for semantic:
 ;; (semantic-add-system-include "/usr/include/" 'c++-mode)
 ;; (semantic-add-system-include "/usr/include/" 'c-mode)
 
 ;; malabar
-; (add-to-list 'load-path "~/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lisp")
 (require 'cedet)
 (require 'semantic)
 (load "semantic/loaddefs.el")
 (semantic-mode 1);;
-(require 'malabar-mode)
-; (setq malabar-groovy-lib-dir "~/.emacs.d/site-lisp/malabar-1.5-SNAPSHOT/lib")
-(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
-(add-to-list 'auto-mode-alist '("\\.groovy\\'" . malabar-mode))
-(add-hook 'malabar-mode-hook
-           (lambda () 
-             (add-hook 'after-save-hook 'malabar-compile-file-silently
-                       nil t)))
-(add-hook 'malabar-mode-hook (function cscope:hook))
-(add-hook 'malabar-mode-hook 'auto-complete-mode)
-(add-hook 'malabar-mode-hook 'subword-mode)
-(add-hook 'malabar-mode-hook 'rainbow-delimiters-mode)
+;; (require 'malabar-mode)
+;; (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
+;; (add-to-list 'auto-mode-alist '("\\.groovy\\'" . malabar-mode))
+;; (add-hook 'malabar-mode-hook
+;;            (lambda () 
+;;              (add-hook 'after-save-hook 'malabar-compile-file-silently
+;;                        nil t)))
+;; (add-hook 'malabar-mode-hook (function cscope:hook))
+;; (add-hook 'malabar-mode-hook 'auto-complete-mode)
+;; (add-hook 'malabar-mode-hook 'subword-mode)
+;; (add-hook 'malabar-mode-hook 'rainbow-delimiters-mode)
 ; (add-hook 'malabar-mode-hook #'enable-paredit-mode)
 
 ;; python-mode
@@ -213,10 +213,9 @@
  "eim-py" "euc-cn" 'eim-use-package
  "拼音" "汉字拼音输入法" "py.txt")
 
-;; 用 ; 暂时输入英文
-(require 'eim-extra)
-(global-set-key ";" 'eim-insert-ascii)
 
+(require 'eim-extra)
+(global-set-key [(control \\)]  'eim-insert-ascii)
 
 (setq auto-mode-alist
 	  (append '(("\\.h$" . c++-mode)) auto-mode-alist))
@@ -271,8 +270,17 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(current-language-environment "UTF-8")
+ '(doc-view-continuous t)
  '(ecb-options-version "2.40")
- '(safe-local-variable-values (quote ((Base . 10) (Package . HUNCHENTOOT) (Syntax . COMMON-LISP) (encoding . utf-8)))))
+ '(safe-local-variable-values
+   (quote
+    ((Base . 10)
+     (Package . HUNCHENTOOT)
+     (Syntax . COMMON-LISP)
+     (encoding . utf-8))))
+ '(send-mail-function (quote smtpmail-send-it))
+ '(smtpmail-smtp-server "mail.corp.qunar.com")
+ '(smtpmail-smtp-service 25))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -372,13 +380,16 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
+(custom-set-variables
+ '(markdown-command "/bin/pandoc"))
+
 ;; json-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/json-mode-master")
 (require 'json-mode)
 
 ;; global key bindings
 (global-set-key [(control c) (u) (r)] 'uncomment-region)
-(global-set-key [(control c) (c) (r)] 'comment-region)
+(global-set-key [(control c) (c) (r)] 'comment-or-uncomment-region)
 
 ;; auto-mode-alist for cql
 (setq auto-mode-alist (cons '("\\.cql$" . sql-mode) auto-mode-alist))
@@ -391,7 +402,51 @@
 (add-hook 'scala-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'scala-mode-hook 'subword-mode)
 
-(require 'ensime)
+;; (require 'ensime)
 
 ;; mit-scheme
 (require 'xscheme)
+
+;; browser
+
+(setq browse-url-generic-program
+      (executable-find "opera")
+      browse-url-browser-function 'browse-url-generic)
+
+
+;; qtalk settings
+(add-to-list 'load-path "~/Documents/sources/emacs-jabber")
+
+;; (setq jabber-qim-pubkey-file
+;;       "~/Documents/sources/emacs-jabber/resources/qtalk_pub_key.pem")
+
+(load "jabber-autoloads")
+
+(setq jabber-debug-log-xml t)
+
+(setq jabber-invalid-certificate-servers '("qt.corp.qunar.com"))
+
+(setq starttls-extra-arguments  '("--insecure"))
+(setq jabber-history-enabled t)
+(setq jabber-use-global-history nil)
+(setq jabber-history-muc-enabled t)
+(setq jabber-history-dir "~/qtalk-logs")
+(setq jabber-muc-colorize-foreign t) ;; nick color
+
+(setq jabber-alert-presence-message-function
+      (lambda (WHO OLDSTATUS NEWSTATUS STATUSTEXT)
+        nil))
+
+
+;; account list
+(setq jabber-account-list
+      `(
+        ("geng.li@ejabhost1"
+         (:network-server . "qt.corp.qunar.com")
+         (:port . "5222")
+         ; (:connection-type . plain)
+         (:password . ,(jabber-qim-password "xxx" "xxx")))))
+
+(setq debug-on-error t)
+
+(jabber-connect-all)

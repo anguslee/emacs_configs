@@ -20763,7 +20763,6 @@
 ("yyybj" "★")
 ("yyybl" "●")
 ("yyybm" "⊙")
-("yyybn" "◎")
 ("yyybo" "╳")
 ("yyybp" "※")
 ("yyybq" "♂")
