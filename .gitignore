@@ -9,3 +9,10 @@ dict-english.el
 dict-latex-env.el
 dict-latex-math.el
 dict-latex.el
+
+site-lisp/predictive/dict-english.el
+site-lisp/predictive/latex/dict-latex-env.el
+site-lisp/predictive/latex/dict-latex-preamble.el
+site-lisp/predictive/latex/dict-latex.el
+
+platform-settings.el

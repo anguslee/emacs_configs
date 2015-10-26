@@ -17,7 +17,7 @@
 ; (package-refresh-contents)
 (package-initialize)
 (defvar my-packages
-  '(paredit smartparens rainbow-delimiters auctex scala-mode2 malabar-mode noflet uuid))
+  '(company paredit smartparens rainbow-delimiters auctex scala-mode2 malabar-mode))
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (package-install p)))
@@ -26,9 +26,26 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/popup-el")
 
 ;; auto-complete-mode:
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
-(require 'auto-complete-config)
-(ac-config-default)
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
+;; (require 'auto-complete-config)
+;; (ac-config-default)
+
+;; company
+(add-hook 'after-init-hook 'global-company-mode)
+
+(require 'company-emoji)
+(add-hook 'markdown-mode-hook 'company-mode)
+(add-hook 'markdown-mode-hook 'company-emoji-init)
+
+(defun darwin-set-emoji-font (frame)
+"Adjust the font settings of FRAME so Emacs NS/Cocoa can display emoji properly."
+  (if (eq system-type 'darwin)
+    (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)))
+;; For when emacs is started with Emacs.app
+(darwin-set-emoji-font nil)
+;; Hook for when a cocoa frame is created with emacsclient
+;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
+(add-hook 'after-make-frame-functions 'darwin-set-emoji-font)
 
 ;; predictive-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/predictive")
@@ -407,46 +424,5 @@
 ;; mit-scheme
 (require 'xscheme)
 
-;; browser
-
-(setq browse-url-generic-program
-      (executable-find "opera")
-      browse-url-browser-function 'browse-url-generic)
-
-
-;; qtalk settings
-(add-to-list 'load-path "~/Documents/sources/emacs-jabber")
-
-;; (setq jabber-qim-pubkey-file
-;;       "~/Documents/sources/emacs-jabber/resources/qtalk_pub_key.pem")
-
-(load "jabber-autoloads")
-
-(setq jabber-debug-log-xml t)
-
-(setq jabber-invalid-certificate-servers '("qt.corp.qunar.com"))
-
-(setq starttls-extra-arguments  '("--insecure"))
-(setq jabber-history-enabled t)
-(setq jabber-use-global-history nil)
-(setq jabber-history-muc-enabled t)
-(setq jabber-history-dir "~/qtalk-logs")
-(setq jabber-muc-colorize-foreign t) ;; nick color
-
-(setq jabber-alert-presence-message-function
-      (lambda (WHO OLDSTATUS NEWSTATUS STATUSTEXT)
-        nil))
-
-
-;; account list
-(setq jabber-account-list
-      `(
-        ("geng.li@ejabhost1"
-         (:network-server . "qt.corp.qunar.com")
-         (:port . "5222")
-         ; (:connection-type . plain)
-         (:password . ,(jabber-qim-password "xxx" "xxx")))))
-
-(setq debug-on-error t)
-
-(jabber-connect-all)
+(ignore-errors
+  (load-file "~/.emacs.d/platform-settings.el"))
