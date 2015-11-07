@@ -156,30 +156,6 @@
 ;; (add-hook 'malabar-mode-hook 'rainbow-delimiters-mode)
 ; (add-hook 'malabar-mode-hook #'enable-paredit-mode)
 
-;; python-mode
-(when (featurep 'python)
-  (unload-feature 'python t))
-(add-to-list 'load-path "~/.emacs.d/site-lisp/python-mode")
-(setq py-install-directory "~/.emacs.d/site-lisp/python-mode")
-(setq auto-mode-alist
-	  (append '(("\\.py$" . python-mode)) auto-mode-alist))
-(require 'python-mode)
-
-; use IPython
-(setq-default py-shell-name "ipython")
-(setq-default py-which-bufname "IPython")
-; use the wx backend, for both mayavi and matplotlib
-(setq py-python-command-args
-      '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
-(setq py-force-py-shell-name-p t)
-
-; switch to the interpreter after executing code
-(setq py-shell-switch-buffers-on-execute-p t)
-(setq py-switch-buffers-on-execute-p t)
-; don't split windows
-(setq py-split-windows-on-execute-p nil)
-; try to automagically figure out indentation
-(setq py-smart-indentation t)
 
 ;; cc-mode
 (require 'cc-mode)
@@ -415,11 +391,8 @@
 (require 'scala-mode2)
 (setq scala-indent:step 4)
 (define-key scala-mode-map [(return)] 'newline-and-indent)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 (add-hook 'scala-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'scala-mode-hook 'subword-mode)
-
-;; (require 'ensime)
 
 ;; mit-scheme
 (require 'xscheme)
