@@ -373,8 +373,6 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
-(custom-set-variables
- '(markdown-command "/bin/pandoc"))
 
 ;; json-mode
 (add-to-list 'load-path "~/.emacs.d/site-lisp/json-mode-master")
