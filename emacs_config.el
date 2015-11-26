@@ -32,10 +32,8 @@
 
 ;; company
 (add-hook 'after-init-hook 'global-company-mode)
-
 (require 'company-emoji)
-(add-hook 'markdown-mode-hook 'company-mode)
-(add-hook 'markdown-mode-hook 'company-emoji-init)
+(add-hook 'after-init-hook 'company-emoji-init)
 
 (defun darwin-set-emoji-font (frame)
 "Adjust the font settings of FRAME so Emacs NS/Cocoa can display emoji properly."
