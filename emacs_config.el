@@ -137,10 +137,10 @@
 ;; (semantic-add-system-include "/usr/include/" 'c-mode)
 
 ;; malabar
-(require 'cedet)
-(require 'semantic)
-(load "semantic/loaddefs.el")
-(semantic-mode 1);;
+;; (require 'cedet)
+;; (require 'semantic)
+;; (load "semantic/loaddefs.el")
+;; (semantic-mode 1);;
 ;; (require 'malabar-mode)
 ;; (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.groovy\\'" . malabar-mode))
@@ -390,8 +390,9 @@
 (add-hook 'scala-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'scala-mode-hook 'subword-mode)
 
-;; mit-scheme
+;; scheme mode
 (require 'xscheme)
+(add-to-list 'auto-mode-alist '("\\.scm$" . scheme-mode))
 
 (ignore-errors
   (load-file "~/.emacs.d/platform-settings.el"))
