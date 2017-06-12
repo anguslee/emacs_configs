@@ -15,4 +15,8 @@ site-lisp/predictive/latex/dict-latex-env.el
 site-lisp/predictive/latex/dict-latex-preamble.el
 site-lisp/predictive/latex/dict-latex.el
 
+elpa
+eshell
+site-lisp/jdee-server
+
 platform-settings.el

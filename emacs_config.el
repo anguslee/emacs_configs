@@ -10,14 +10,14 @@
 
 ;; install packages
 (require 'package)
-;; (add-to-list 'package-archives
-;;              '("melpa" .
-;;                "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" .
+               "https://melpa.org/packages/"))
 
 ; (package-refresh-contents)
 (package-initialize)
 (defvar my-packages
-  '(company paredit smartparens rainbow-delimiters auctex scala-mode2 malabar-mode))
+  '(company paredit smartparens rainbow-delimiters auctex scala-mode2 jdee))
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (package-install p)))
@@ -136,24 +136,6 @@
 ;; (semantic-add-system-include "/usr/include/" 'c++-mode)
 ;; (semantic-add-system-include "/usr/include/" 'c-mode)
 
-;; malabar
-;; (require 'cedet)
-;; (require 'semantic)
-;; (load "semantic/loaddefs.el")
-;; (semantic-mode 1);;
-;; (require 'malabar-mode)
-;; (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
-;; (add-to-list 'auto-mode-alist '("\\.groovy\\'" . malabar-mode))
-;; (add-hook 'malabar-mode-hook
-;;            (lambda () 
-;;              (add-hook 'after-save-hook 'malabar-compile-file-silently
-;;                        nil t)))
-;; (add-hook 'malabar-mode-hook (function cscope:hook))
-;; (add-hook 'malabar-mode-hook 'auto-complete-mode)
-;; (add-hook 'malabar-mode-hook 'subword-mode)
-;; (add-hook 'malabar-mode-hook 'rainbow-delimiters-mode)
-; (add-hook 'malabar-mode-hook #'enable-paredit-mode)
-
 
 ;; cc-mode
 (require 'cc-mode)
@@ -263,6 +245,10 @@
  '(current-language-environment "UTF-8")
  '(doc-view-continuous t)
  '(ecb-options-version "2.40")
+ '(jdee-server-dir "~/.emacs.d/site-lisp/jdee-server/jars")
+ '(package-selected-packages
+   (quote
+    (jdee uuid smartparens sbt-mode s rainbow-delimiters paredit noflet malabar-mode company auctex)))
  '(safe-local-variable-values
    (quote
     ((Base . 10)
@@ -393,6 +379,9 @@
 ;; scheme mode
 (require 'xscheme)
 (add-to-list 'auto-mode-alist '("\\.scm$" . scheme-mode))
+
+;; jdee
+(require 'jdee)
 
 (ignore-errors
   (load-file "~/.emacs.d/platform-settings.el"))
