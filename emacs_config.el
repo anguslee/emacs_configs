@@ -205,7 +205,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (restclient json-mode scala-mode2 xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji))))
+    (auctex restclient json-mode scala-mode2 xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
