@@ -12,5 +12,3 @@ site-lisp
 -------------
 
 The extensions, some of which are slightly modified to work around bugs or inconviniences. This directory includes the following major extensions:
-
-* eassist
