@@ -100,10 +100,6 @@
 
 (global-set-key [(control return)] 'semantic-ia-complete-symbol)
 
-;; eassist
-(require 'eassist)
-(define-key c-mode-base-map [(control x) (t)] 'eassist-switch-h-cpp) ;override toggle-source()
-
 ;; cc-mode
 (require 'cc-mode)
 (setq auto-mode-alist
