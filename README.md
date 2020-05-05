@@ -11,14 +11,6 @@ emacs_config.el
 site-lisp
 -------------
 
-The extensions, some of which are slightly modified to work around bugs or inconviniences. This directory incluedes the following major extensions:
+The extensions, some of which are slightly modified to work around bugs or inconviniences. This directory includes the following major extensions:
 
-* psvn
-* ecb (Emacs Code Browser)
-* malabar (Maven support for java projects)
-* auto-complete
-* doxymacs
-* json-mode
-* lua-mode
-* xcscope
-* slime
+* eassist
