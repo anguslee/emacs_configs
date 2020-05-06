@@ -16,7 +16,7 @@
 (package-initialize)
 (defvar my-packages
   '(company company-emoji paredit smartparens rainbow-delimiters scala-mode2 jdee xcscope
-            php-mode google-c-style ecb git git-blamed lua-mode
+            php-mode google-c-style ecb magit lua-mode
             markdown-mode markdown-mode+ markdown-preview-eww
             markdown-toc markdownfmt json-mode restclient auctex))
 (dolist (p my-packages)
@@ -147,8 +147,14 @@
 
 
 ;; git
-(require 'git)
-(require 'git-blamed)
+;; (require 'git)
+;; (require 'git-blamed)
+;; (if (eq system-type 'darwin)
+;;     (global-set-key [(control f11)] 'magit-status)
+;;   (global-set-key [(f11)] 'magit-status))
+
+;; majit
+(require 'magit)
 
 ;; lua-mode
 (setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
@@ -199,9 +205,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ecb-options-version "2.50")
  '(package-selected-packages
    (quote
-    (auctex restclient json-mode scala-mode2 xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji))))
+    (magit auctex restclient json-mode scala-mode2 xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
