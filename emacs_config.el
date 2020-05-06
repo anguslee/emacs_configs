@@ -15,8 +15,8 @@
 ; (package-refresh-contents)
 (package-initialize)
 (defvar my-packages
-  '(company company-emoji paredit smartparens rainbow-delimiters scala-mode2 jdee xcscope
-            php-mode google-c-style ecb magit lua-mode
+  '(company company-emoji paredit smartparens rainbow-delimiters scala-mode jdee xcscope
+            php-mode google-c-style ecb magit lua-mode color-theme-modern
             markdown-mode markdown-mode+ markdown-preview-eww
             markdown-toc markdownfmt json-mode restclient auctex))
 (dolist (p my-packages)
@@ -42,6 +42,11 @@
 ;; Hook for when a cocoa frame is created with emacsclient
 ;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
 (add-hook 'after-make-frame-functions 'darwin-set-emoji-font)
+
+;; Custom theme
+(cond (window-system
+       (load-theme 'deep-blue t)
+       (enable-theme 'deep-blue)))
 
 ;; paredit
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
@@ -208,7 +213,7 @@
  '(ecb-options-version "2.50")
  '(package-selected-packages
    (quote
-    (magit auctex restclient json-mode scala-mode2 xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji))))
+    (magit auctex restclient json-mode xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
