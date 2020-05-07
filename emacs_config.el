@@ -205,12 +205,27 @@
 (add-hook 'scala-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'scala-mode-hook 'subword-mode)
 
+;; eim https://github.com/wenbinye/emacs-eim
+(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-eim")
+(autoload 'eim-use-package "eim" "Another emacs input method")
+;; Tooltip 暂时还不好用
+(setq eim-use-tooltip nil)
+
+(register-input-method
+ "eim-wb" "euc-cn" 'eim-use-package
+ "五笔" "汉字五笔输入法" "wb.txt")
+(register-input-method
+ "eim-py" "euc-cn" 'eim-use-package
+ "拼音" "汉字拼音输入法" "py.txt")
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ecb-options-version "2.50")
+ '(warning-suppress-types (quote ((undo discard-info))))
  '(package-selected-packages
    (quote
     (magit auctex restclient json-mode xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji))))
