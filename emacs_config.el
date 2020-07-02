@@ -17,7 +17,7 @@
 (defvar my-packages
   '(company company-emoji paredit smartparens rainbow-delimiters scala-mode jdee xcscope
             php-mode google-c-style ecb magit lua-mode color-theme-modern
-            markdown-mode markdown-mode+ markdown-preview-eww
+            markdown-mode markdown-mode+ markdown-preview-eww autopair dumb-jump function-args
             markdown-toc markdownfmt json-mode restclient auctex))
 (dolist (p my-packages)
   (unless (package-installed-p p)
@@ -56,6 +56,8 @@
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+(add-hook 'c-mode-hook #'enable-paredit-mode)
+(add-hook 'c++-mode-hook #'enable-paredit-mode)
 
 ;; rainbow-delimiters
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
@@ -105,10 +107,40 @@
 
 (global-set-key [(control return)] 'semantic-ia-complete-symbol)
 
+
+;; autopair
+(require 'autopair)
+(add-hook 'c-mode-common-hook
+          #'(lambda () (autopair-mode)))
+
+;; switch-file
+(require 'switch-file)
+(global-set-key [(control x) (t)] 'switch-cc-to-h)
+
+;; dumb-jump
+(dumb-jump-mode)
+(setq dumb-jump-default-project "~/Documents/Workspace")
+(setq dumb-jump-prefer-searcher 'ag)
+
+;; doxygen
+(add-to-list 'load-path
+             "~/.emacs.d/site-lisp/doxygen-el")
+(require 'doxygen)
+
+;; member-functions
+(require 'member-functions)
+(setq  mf--header-file-extension "hpp")
+(setq  mf--source-file-extension "cpp")
+
+;; function-args
+(require 'function-args)
+(fa-config-default)
+
 ;; cc-mode
 (require 'cc-mode)
 (setq auto-mode-alist
-	  (append '(("\\.h$" . c++-mode)) auto-mode-alist))
+	  (append '(("\\.h$" . c++-mode)
+                ("\\.hpp$" . c++-mode)) auto-mode-alist))
 
 (add-hook 'c-mode-hook 'semantic-default-c-setup)
 (add-hook 'c++-mode-hook 'semantic-default-c-setup)
@@ -123,10 +155,10 @@
 
 ;; google-c-style
 (require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-(add-hook 'c++-mode-common-hook 'google-set-c-style)
-(add-hook 'c++-mode-common-hook 'google-make-newline-indent)
+;(add-hook 'c-mode-common-hook 'google-set-c-style)
+;(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+;(add-hook 'c++-mode-common-hook 'google-set-c-style)
+;(add-hook 'c++-mode-common-hook 'google-make-newline-indent)
 
 (require 'ecb)
 
@@ -225,10 +257,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ecb-options-version "2.50")
- '(warning-suppress-types (quote ((undo discard-info))))
  '(package-selected-packages
    (quote
-    (magit auctex restclient json-mode xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji))))
+    (ivy function-args dumb-jump auto-complete-clang autopair toggle magit auctex restclient json-mode xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji)))
+ '(warning-suppress-types (quote ((undo discard-info)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
