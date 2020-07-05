@@ -16,9 +16,9 @@
 (package-initialize)
 (defvar my-packages
   '(company company-emoji paredit smartparens rainbow-delimiters scala-mode jdee xcscope
-            php-mode google-c-style ecb magit lua-mode color-theme-modern
-            markdown-mode markdown-mode+ markdown-preview-eww autopair dumb-jump function-args
-            markdown-toc markdownfmt json-mode restclient auctex))
+    php-mode google-c-style ecb magit lua-mode color-theme-modern
+    markdown-mode markdown-mode+ markdown-preview-eww autopair dumb-jump function-args
+    yasnippet-snippets yasnippet markdown-toc markdownfmt json-mode restclient auctex))
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (ignore-errors
@@ -126,6 +126,10 @@
 (add-to-list 'load-path
              "~/.emacs.d/site-lisp/doxygen-el")
 (require 'doxygen)
+
+;; yasnippet
+(require 'yasnippet)
+(yas-global-mode 1)
 
 ;; member-functions
 (require 'member-functions)
@@ -259,7 +263,7 @@
  '(ecb-options-version "2.50")
  '(package-selected-packages
    (quote
-    (ivy function-args dumb-jump auto-complete-clang autopair toggle magit auctex restclient json-mode xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji)))
+    (yasnippet-snippets yasnippet ivy function-args dumb-jump auto-complete-clang autopair toggle magit auctex restclient json-mode xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji)))
  '(warning-suppress-types (quote ((undo discard-info)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
