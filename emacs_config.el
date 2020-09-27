@@ -16,13 +16,16 @@
 (package-initialize)
 (defvar my-packages
   '(company company-emoji paredit smartparens rainbow-delimiters scala-mode jdee xcscope
-    php-mode google-c-style ecb magit lua-mode color-theme-modern
+    elpy php-mode google-c-style ecb magit lua-mode color-theme-modern
     markdown-mode markdown-mode+ markdown-preview-eww autopair dumb-jump function-args
     yasnippet-snippets yasnippet markdown-toc markdownfmt json-mode restclient auctex))
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (ignore-errors
       (package-install p))))
+
+;; flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; cscope:
 (setq cscope-do-not-update-database t)
@@ -157,6 +160,14 @@
 ;; php-mode
 (require 'php-mode)
 
+;; python
+(elpy-enable)
+;; Enable Flycheck
+(when (require 'flycheck nil t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
+
+
 ;; google-c-style
 (require 'google-c-style)
 ;(add-hook 'c-mode-common-hook 'google-set-c-style)
@@ -261,9 +272,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ecb-options-version "2.50")
+ '(jdee-compile-option-encoding "UTF-8")
+ '(jdee-maven-program "/usr/local/apache-maven-3.5.0/bin/mvn")
  '(package-selected-packages
    (quote
-    (yasnippet-snippets yasnippet ivy function-args dumb-jump auto-complete-clang autopair toggle magit auctex restclient json-mode xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji)))
+    (flycheck-pyflakes elpy yasnippet-snippets yasnippet ivy function-args dumb-jump auto-complete-clang autopair toggle magit auctex restclient json-mode xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji)))
  '(warning-suppress-types (quote ((undo discard-info)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
