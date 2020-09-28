@@ -12,10 +12,10 @@
 	         '("melpa" .
 			   "https://melpa.org/packages/"))
 
-; (package-refresh-contents)
 (package-initialize)
+; (package-refresh-contents)
 (defvar my-packages
-  '(company company-emoji paredit smartparens rainbow-delimiters scala-mode jdee xcscope
+  '(company company-emoji company-c-headers paredit smartparens rainbow-delimiters scala-mode jdee xcscope
     elpy php-mode google-c-style ecb magit lua-mode color-theme-modern
     markdown-mode markdown-mode+ markdown-preview-eww autopair dumb-jump function-args
     yasnippet-snippets yasnippet markdown-toc markdownfmt json-mode restclient auctex))
@@ -33,6 +33,9 @@
 
 ;; company
 (add-hook 'after-init-hook 'global-company-mode)
+(require 'company)
+(require 'company-c-headers)
+(add-to-list 'company-backends 'company-c-headers)
 (require 'company-emoji)
 (add-hook 'after-init-hook 'company-emoji-init)
 
@@ -271,19 +274,20 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(company-c-headers-path-system
+   (quote
+    ("/usr/include/" "/usr/local/include/" "/usr/src/linux/include")))
  '(ecb-options-version "2.50")
  '(jdee-compile-option-encoding "UTF-8")
  '(jdee-maven-program "/usr/local/apache-maven-3.5.0/bin/mvn")
- '(package-selected-packages
-   (quote
-    (flycheck-pyflakes elpy yasnippet-snippets yasnippet ivy function-args dumb-jump auto-complete-clang autopair toggle magit auctex restclient json-mode xcscope smartparens scala-mode rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-mode markdown-preview-eww markdown-mode+ lua-mode jdee google-c-style git-blamed git ecb company-emoji)))
  '(warning-suppress-types (quote ((undo discard-info)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Liberation Mono" :foundry "1ASC" :slant normal :weight normal :height 113 :width normal)))))
 
 (ignore-errors
   (load-file "~/.emacs.d/platform-settings.el"))
