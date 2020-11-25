@@ -41,8 +41,10 @@
 
 (defun darwin-set-emoji-font (frame)
 "Adjust the font settings of FRAME so Emacs NS/Cocoa can display emoji properly."
-  (if (eq system-type 'darwin)
-    (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend)))
+  (if (and window-system
+           (eq system-type 'darwin))
+      (ignore-errors
+        (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'prepend))))
 ;; For when emacs is started with Emacs.app
 (darwin-set-emoji-font nil)
 ;; Hook for when a cocoa frame is created with emacsclient
@@ -269,19 +271,7 @@
  "拼音" "汉字拼音输入法" "py.txt")
 
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(company-c-headers-path-system
-   (quote
-    ("/usr/include/" "/usr/local/include/" "/usr/src/linux/include")))
- '(ecb-options-version "2.50")
- '(jdee-compile-option-encoding "UTF-8")
- '(jdee-maven-program "/usr/local/apache-maven-3.5.0/bin/mvn")
- '(warning-suppress-types (quote ((undo discard-info)))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
