@@ -16,7 +16,7 @@
 ; (package-refresh-contents)
 (defvar my-packages
   '(company company-emoji company-c-headers paredit smartparens rainbow-delimiters scala-mode jdee xcscope
-    elpy php-mode google-c-style ecb magit lua-mode color-theme-modern
+    elpy php-mode google-c-style ecb magit lua-mode color-theme-modern nginx-mode company-nginx
     markdown-mode markdown-mode+ markdown-preview-eww autopair dumb-jump function-args
     yasnippet-snippets yasnippet markdown-toc markdownfmt json-mode restclient auctex))
 (dolist (p my-packages)
@@ -64,8 +64,6 @@
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-(add-hook 'c-mode-hook #'enable-paredit-mode)
-(add-hook 'c++-mode-hook #'enable-paredit-mode)
 
 ;; rainbow-delimiters
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
@@ -155,12 +153,40 @@
                 ("\\.hpp$" . c++-mode)) auto-mode-alist))
 
 (add-hook 'c-mode-hook 'semantic-default-c-setup)
+(add-hook 'c-mode-hook
+          (lambda ()
+            (c-set-style "linux")
+            (c-set-offset 'arglist-cont-nonempty 'c-mode-arglist-lineup)))
 (add-hook 'c++-mode-hook 'semantic-default-c-setup)
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (c-set-style "stroustrup")
+            (c-set-offset 'arglist-cont-nonempty 'c-mode-arglist-lineup)))
 
-(define-key c-mode-base-map [(return)] 'newline-and-indent)
+(defun cc-mode-arglist-switch-indent ()
+  (interactive)
+  (when (eq (caar (c-guess-basic-syntax))
+            'arglist-cont-nonempty)
+    (let ((old-lineup-func
+           (alist-get 'arglist-cont-nonempty
+                      c-offsets-alist)))
+      (setq c-offsets-alist
+            (assq-delete-all 'arglist-cont-nonempty
+                             c-offsets-alist))
+      (if (eq old-lineup-func
+              '+)
+          (add-to-list 'c-offsets-alist
+                       (cons 'arglist-cont-nonempty 'c-mode-arglist-lineup))
+        (add-to-list 'c-offsets-alist
+                     (cons 'arglist-cont-nonempty '+))) 
+      (c-indent-line-or-region))))
+
+(define-key c-mode-base-map [(meta \`)]
+  'cc-mode-arglist-switch-indent)
+
 (global-set-key [(f5)] 'gdb)
 (global-set-key [(f7)] 'compile)
-(define-key c-mode-base-map [(meta \`)] 'c-indent-command)
+
 
 ;; php-mode
 (require 'php-mode)
@@ -289,3 +315,13 @@
 
 (ignore-errors
   (load-file "~/.emacs.d/platform-settings.el"))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(jdee-compile-option-encoding "UTF-8")
+ '(jdee-maven-program "/usr/local/apache-maven-3.5.0/bin/mvn")
+ '(package-selected-packages
+   (quote
+    (company-nginx nginx-mode yasnippet-snippets xcscope smartparens scala-mode restclient rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-eww markdown-mode+ magit lua-mode json-mode jdee google-c-style function-args flycheck-pyflakes elpy ecb dumb-jump company-emoji company-c-headers color-theme-modern autopair auctex))))
