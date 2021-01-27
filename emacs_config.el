@@ -257,6 +257,14 @@
 (add-hook 'scala-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'scala-mode-hook 'subword-mode)
 
+;; TAGS
+(setq path-to-ctags "/usr/bin/ctags")
+(defun create-tags (dir-name)
+  "Create tags file."
+  (interactive "DDirectory: ")
+  (shell-command
+   (format "%s -f TAGS -e -R %s" path-to-ctags (directory-file-name dir-name))))
+
 ;; eim https://github.com/wenbinye/emacs-eim
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-eim")
 (autoload 'eim-use-package "eim" "Another emacs input method")
