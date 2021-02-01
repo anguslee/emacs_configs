@@ -1,7 +1,6 @@
 ;; .emacs
 
 (setq-default tab-width 4 indent-tabs-mode nil)
-(setq c-basic-offset 4)
 (setq x-select-enable-clipboard t)
 (set-language-environment "UTF-8")
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
@@ -159,6 +158,7 @@
 (add-hook 'c-mode-hook
           (lambda ()
             (c-set-style "linux")
+            (setq c-basic-offset 4)
             (c-set-offset 'arglist-cont-nonempty 'c-lineup-arglist)))
 (add-hook 'c++-mode-hook 'semantic-default-c-setup)
 (add-hook 'c++-mode-hook
