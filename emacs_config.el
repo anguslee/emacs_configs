@@ -17,7 +17,7 @@
 (defvar my-packages
   '(company company-emoji company-c-headers paredit smartparens rainbow-delimiters scala-mode jdee xcscope
     elpy php-mode google-c-style ecb magit lua-mode color-theme-modern nginx-mode company-nginx
-    markdown-mode markdown-mode+ markdown-preview-eww autopair dumb-jump function-args
+    markdown-mode markdown-mode+ markdown-preview-eww autopair dumb-jump function-args ws-butler
     yasnippet-snippets yasnippet markdown-toc markdownfmt json-mode restclient auctex))
 (dolist (p my-packages)
   (unless (package-installed-p p)
@@ -119,6 +119,9 @@
 (add-hook 'c-mode-common-hook
           #'(lambda () (autopair-mode)))
 
+(require 'ws-butler)
+(add-hook 'prog-mode-hook #'ws-butler-mode)
+
 ;; switch-file
 (require 'switch-file)
 (global-set-key [(control x) (t)] 'switch-cc-to-h)
@@ -156,12 +159,12 @@
 (add-hook 'c-mode-hook
           (lambda ()
             (c-set-style "linux")
-            (c-set-offset 'arglist-cont-nonempty 'c-mode-arglist-lineup)))
+            (c-set-offset 'arglist-cont-nonempty 'c-lineup-arglist)))
 (add-hook 'c++-mode-hook 'semantic-default-c-setup)
 (add-hook 'c++-mode-hook
           (lambda ()
             (c-set-style "stroustrup")
-            (c-set-offset 'arglist-cont-nonempty 'c-mode-arglist-lineup)))
+            (c-set-offset 'arglist-cont-nonempty 'c-lineup-arglist)))
 
 (defun cc-mode-arglist-switch-indent ()
   (interactive)
@@ -176,7 +179,7 @@
       (if (eq old-lineup-func
               '+)
           (add-to-list 'c-offsets-alist
-                       (cons 'arglist-cont-nonempty 'c-mode-arglist-lineup))
+                       (cons 'arglist-cont-nonempty 'c-lineup-arglist))
         (add-to-list 'c-offsets-alist
                      (cons 'arglist-cont-nonempty '+))) 
       (c-indent-line-or-region))))
@@ -316,4 +319,4 @@
  '(jdee-maven-program "/usr/local/apache-maven-3.5.0/bin/mvn")
  '(package-selected-packages
    (quote
-    (company-nginx nginx-mode yasnippet-snippets xcscope smartparens scala-mode restclient rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-eww markdown-mode+ magit lua-mode json-mode jdee google-c-style function-args flycheck-pyflakes elpy ecb dumb-jump company-emoji company-c-headers color-theme-modern autopair auctex))))
+    (ws-butler company-nginx nginx-mode yasnippet-snippets xcscope smartparens scala-mode restclient rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-eww markdown-mode+ magit lua-mode json-mode jdee google-c-style function-args flycheck-pyflakes elpy ecb dumb-jump company-emoji company-c-headers color-theme-modern autopair auctex))))
