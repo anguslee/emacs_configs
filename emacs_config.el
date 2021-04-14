@@ -1,7 +1,11 @@
-;; .emacs
+;;; .emacs --- Major configuration file for emacs
 
+;;; Commentary:
+;;    N/A
+
+;;; Code:
 (setq-default tab-width 4 indent-tabs-mode nil)
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 (set-language-environment "UTF-8")
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 
@@ -13,22 +17,22 @@
 
 (package-initialize)
 ; (package-refresh-contents)
-(defvar my-packages
+(setq package-selected-packages
   '(company company-emoji company-c-headers paredit smartparens rainbow-delimiters scala-mode jdee xcscope
     elpy php-mode google-c-style ecb magit lua-mode color-theme-modern nginx-mode company-nginx
     markdown-mode markdown-mode+ markdown-preview-eww autopair dumb-jump function-args ws-butler
-    yasnippet-snippets yasnippet markdown-toc markdownfmt json-mode restclient auctex))
-(dolist (p my-packages)
-  (unless (package-installed-p p)
-    (ignore-errors
-      (package-install p))))
+    yasnippet-snippets yasnippet markdown-toc markdownfmt json-mode restclient auctex
+    lsp-mode lsp-treemacs helm-lsp projectile hydra flycheck avy which-key helm-xref dap-mode
+    dash-functional dash flycheck-clangcheck))
+
+(when (cl-find-if-not #'package-installed-p package-selected-packages)
+  (package-refresh-contents)
+  (mapc #'package-install package-selected-packages))
+
 
 ;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-;; cscope:
-(setq cscope-do-not-update-database t)
-(require 'xcscope)
 
 ;; company
 (add-hook 'after-init-hook 'global-company-mode)
@@ -78,7 +82,6 @@
 (setq default-directory "~/")
 
 ;; cscope:
-(setq cscope-do-not-update-database t)
 (require 'xcscope)
 
 ;; cedet:
@@ -190,6 +193,30 @@
 (global-set-key [(f5)] 'gdb)
 (global-set-key [(f7)] 'compile)
 
+;; lsp-mode related:
+(helm-mode)
+(require 'helm-xref)
+(define-key global-map [remap find-file] #'helm-find-files)
+(define-key global-map [remap execute-extended-command] #'helm-M-x)
+(define-key global-map [remap switch-to-buffer] #'helm-mini)
+
+(which-key-mode)
+(add-hook 'c-mode-hook 'lsp)
+(add-hook 'c++-mode-hook 'lsp)
+
+(setq gc-cons-threshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024)
+      treemacs-space-between-root-nodes nil
+      company-idle-delay 0.0
+      company-minimum-prefix-length 1
+      lsp-idle-delay 0.1)  ;; clangd is fast
+
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  (require 'dap-cpptools)
+  (yas-global-mode))
+
+;; end of lsp-mode related
 
 ;; php-mode
 (require 'php-mode)
@@ -270,13 +297,14 @@
 (add-hook 'TeX-mode-hook 'predictive-mode)
 
 ;; markdown-mode
+(setq markdown-command "pandoc")
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (autoload 'gfm-mode "markdown-mode"
-   "Major mode for editing GitHub Flavored Markdown files" t)
+  "Major mode for editing GitHub Flavored Markdown files" t)
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
 ;; scala mode
@@ -289,7 +317,7 @@
 ;; TAGS
 (setq path-to-ctags "/usr/bin/ctags")
 (defun create-tags (dir-name)
-  "Create tags file."
+  "Create tags file for DIR-NAME."
   (interactive "DDirectory: ")
   (shell-command
    (format "%s -f TAGS -e -R %s" path-to-ctags (directory-file-name dir-name))))
@@ -326,5 +354,7 @@
  '(jdee-compile-option-encoding "UTF-8")
  '(jdee-maven-program "/usr/local/apache-maven-3.5.0/bin/mvn")
  '(package-selected-packages
-   (quote
-    (ws-butler company-nginx nginx-mode yasnippet-snippets xcscope smartparens scala-mode restclient rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-eww markdown-mode+ magit lua-mode json-mode jdee google-c-style function-args flycheck-pyflakes elpy ecb dumb-jump company-emoji company-c-headers color-theme-modern autopair auctex))))
+   '(flycheck-clangcheck dash-functional dash ws-butler company-nginx nginx-mode yasnippet-snippets xcscope smartparens scala-mode restclient rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-eww markdown-mode+ magit lua-mode json-mode jdee google-c-style function-args flycheck-pyflakes elpy ecb dumb-jump company-emoji company-c-headers color-theme-modern autopair auctex)))
+
+(provide 'emacs_config)
+;;; emacs_config.el ends here
