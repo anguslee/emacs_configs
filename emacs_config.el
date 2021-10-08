@@ -40,7 +40,7 @@
 (require 'company-c-headers)
 (add-to-list 'company-backends 'company-c-headers)
 (require 'company-emoji)
-(add-hook 'after-init-hook 'company-emoji-init)
+; (add-hook 'after-init-hook 'company-emoji-init)
 
 (defun darwin-set-emoji-font (frame)
 "Adjust the font settings of FRAME so Emacs NS/Cocoa can display emoji properly."
@@ -167,6 +167,7 @@
 (add-hook 'c++-mode-hook
           (lambda ()
             (c-set-style "stroustrup")
+            (setq c-basic-offset 4)
             (c-set-offset 'arglist-cont-nonempty 'c-lineup-arglist)))
 
 (defun cc-mode-arglist-switch-indent ()
