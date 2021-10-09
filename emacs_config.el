@@ -14,9 +14,9 @@
 (add-to-list 'package-archives
 	         '("melpa" .
 			   "https://melpa.org/packages/"))
+; (setq package-check-signature nil)
 
 (package-initialize)
-; (package-refresh-contents)
 (setq package-selected-packages
   '(company company-emoji company-c-headers paredit smartparens rainbow-delimiters scala-mode jdee xcscope
     elpy php-mode google-c-style ecb magit lua-mode color-theme-modern nginx-mode company-nginx
@@ -27,7 +27,9 @@
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
-  (mapc #'package-install package-selected-packages))
+  (mapc #'(lambda (pkg)
+            (ignore-errors (package-install pkg)))
+        package-selected-packages))
 
 
 ;; flycheck
@@ -228,7 +230,8 @@
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
-
+;; python-django
+(require 'python-django)
 
 ;; google-c-style
 (require 'google-c-style)
