@@ -20,13 +20,14 @@
 (setq package-selected-packages
   '(company company-emoji company-c-headers paredit smartparens rainbow-delimiters scala-mode jdee xcscope
     elpy php-mode google-c-style ecb magit lua-mode color-theme-modern nginx-mode company-nginx
-    markdown-mode markdown-mode+ markdown-preview-eww autopair dumb-jump function-args ws-butler
+    markdown-mode markdown-mode+ markdown-preview-eww dumb-jump function-args ws-butler
     yasnippet-snippets yasnippet markdown-toc markdownfmt json-mode restclient auctex
     lsp-mode lsp-treemacs helm-lsp projectile hydra flycheck avy which-key helm-xref dap-mode
-    dash-functional dash flycheck-clangcheck))
+    dash-functional dash flycheck-clangcheck flex-autopair))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
-  (package-refresh-contents)
+  (ignore-errors
+    (package-refresh-contents))
   (mapc #'(lambda (pkg)
             (ignore-errors (package-install pkg)))
         package-selected-packages))
@@ -118,10 +119,11 @@
 (global-set-key [(control return)] 'semantic-ia-complete-symbol)
 
 
-;; autopair
-(require 'autopair)
+;; flex-autopair
+(require 'flex-autopair)
 (add-hook 'c-mode-common-hook
-          #'(lambda () (autopair-mode)))
+          #'(lambda () (flex-autopair-mode 1)))
+
 
 (require 'ws-butler)
 (add-hook 'prog-mode-hook #'ws-butler-mode)
@@ -276,8 +278,8 @@
 ;; lua-mode
 (setq auto-mode-alist (cons '("\\.lua$" . lua-mode) auto-mode-alist))
 (setq lua-indent-level 4)
-;;(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-(require 'lua-mode)
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+;; (require 'lua-mode)
 (add-hook 'lua-mode-hook 'turn-on-font-lock)
 (add-hook 'lua-mode-hook 'auto-complete-mode)
 
