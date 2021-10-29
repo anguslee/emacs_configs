@@ -19,7 +19,7 @@
 (package-initialize)
 (setq package-selected-packages
   '(company company-emoji company-c-headers paredit smartparens rainbow-delimiters scala-mode jdee xcscope
-    elpy php-mode google-c-style ecb magit lua-mode color-theme-modern nginx-mode company-nginx
+    elpy anaconda-mode pony-mode php-mode google-c-style ecb magit lua-mode color-theme-modern nginx-mode company-nginx
     markdown-mode markdown-mode+ markdown-preview-eww dumb-jump function-args ws-butler
     yasnippet-snippets yasnippet markdown-toc markdownfmt json-mode restclient auctex
     lsp-mode lsp-treemacs helm-lsp projectile hydra flycheck avy which-key helm-xref dap-mode
@@ -228,12 +228,14 @@
 
 ;; python
 (elpy-enable)
-;; Enable Flycheck
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
 ;; python-django
-(require 'python-django)
+; (require 'python-django)
+;; anaconda-mode
+(require 'anaconda-mode)
+(add-hook 'python-mode-hook 'anaconda-mode)
+(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+;; pony-mode
+(require 'pony-mode)
 
 ;; google-c-style
 (require 'google-c-style)
@@ -360,7 +362,8 @@
  '(jdee-compile-option-encoding "UTF-8")
  '(jdee-maven-program "/usr/local/apache-maven-3.5.0/bin/mvn")
  '(package-selected-packages
-   '(flycheck-clangcheck dash-functional dash ws-butler company-nginx nginx-mode yasnippet-snippets xcscope smartparens scala-mode restclient rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-eww markdown-mode+ magit lua-mode json-mode jdee google-c-style function-args flycheck-pyflakes elpy ecb dumb-jump company-emoji company-c-headers color-theme-modern autopair auctex)))
+   (quote
+    (pony-mode anaconda-mode flycheck-clangcheck dash-functional dash ws-butler company-nginx nginx-mode yasnippet-snippets xcscope smartparens scala-mode restclient rainbow-delimiters php-mode paredit markdownfmt markdown-toc markdown-preview-eww markdown-mode+ magit lua-mode json-mode jdee google-c-style function-args flycheck-pyflakes elpy ecb dumb-jump company-emoji company-c-headers color-theme-modern autopair auctex))))
 
 (provide 'emacs_config)
 ;;; emacs_config.el ends here
