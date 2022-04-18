@@ -19,7 +19,7 @@
 (package-initialize)
 (setq package-selected-packages
   '(company company-emoji company-c-headers paredit smartparens rainbow-delimiters scala-mode jdee xcscope
-    elpy anaconda-mode pony-mode php-mode google-c-style ecb magit lua-mode color-theme-modern nginx-mode company-nginx
+    jedi elpy anaconda-mode pony-mode php-mode google-c-style ecb magit lua-mode color-theme-modern nginx-mode company-nginx
     markdown-mode markdown-mode+ markdown-preview-eww dumb-jump function-args ws-butler
     yasnippet-snippets yasnippet markdown-toc markdownfmt json-mode restclient auctex
     lsp-mode lsp-treemacs helm-lsp projectile hydra flycheck avy which-key helm-xref dap-mode
@@ -236,6 +236,12 @@
 (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 ;; pony-mode
 (require 'pony-mode)
+;; jedi
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+(setq jedi:tooltip-method '(pos-tip))
+(autoload 'jedi:setup "jedi" nil t)
+
 
 ;; google-c-style
 (require 'google-c-style)
